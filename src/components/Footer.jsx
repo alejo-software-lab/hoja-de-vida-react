@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowUp, Code, Code2, Globe, Mail } from "lucide-react";
+import { ArrowUp, Code2, Globe, Mail } from "lucide-react";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -11,9 +11,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-200/50 dark:border-slate-900/50">
           {/* Logo */}
-          <div className="flex items-center gap-2 font-bold text-xl text-indigo-600 dark:text-indigo-400">
-            <Code className="w-6 h-6" />
-            <span>Alejandro Muñoz</span>
+          <div className="flex items-center gap-2">
+            <img
+              src="/alejo-software-labs.svg"
+              alt="Alejo Software Labs"
+              className="h-8 w-auto"
+            />
           </div>
 
           {/* Quick Navigation Footer */}

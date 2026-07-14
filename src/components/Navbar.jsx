@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X, Code } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 
 const Navbar = ({ darkMode, setDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,10 +37,13 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2">
-            <a href="#inicio" className="flex items-center gap-2 font-bold text-xl tracking-tight text-indigo-600 dark:text-indigo-400 group">
-              <Code className="w-6 h-6 transition-transform group-hover:rotate-12" />
-              <span>Alejandro Muñoz</span>
-            </a>
+              <a href="#inicio" className="flex items-center gap-2 group">
+                <img
+                  src="/alejo-software-labs.svg"
+                  alt="Alejo Software Labs"
+                  className="h-8 w-auto"
+                />
+              </a>
           </div>
 
           {/* Desktop Nav Links */}
