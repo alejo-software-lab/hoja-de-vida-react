@@ -7,16 +7,15 @@ env:
     readOnly: true
   - key: MAIL_TO
     value: "Alejandromg94@outlook.com"
-  # Descomenta y completa para enviar correos reales:
-  # - key: SMTP_HOST
-  #   value: "smtp.example.com"
-  # - key: SMTP_PORT
-  #   value: "587"
-  # - key: SMTP_SECURE
-  #   value: "false"
-  # - key: SMTP_USER
-  #   value: "tu_usuario@correo.com"
-  # - key: SMTP_PASS
-  #   value: "tu_contraseña_o_token"
-  # - key: MAIL_FROM
-  #   value: "tu_usuario@correo.com"
+  - key: SMTP_HOST
+    value: "smtp.example.com"
+  - key: SMTP_PORT
+    value: "587"
+  - key: SMTP_SECURE
+    value: "false"
+  - key: SMTP_USER
+    value: "tu_usuario@correo.com"
+  - key: SMTP_PASS
+    value: "tu_contraseña_o_token"
+  - key: MAIL_FROM
+    value: "tu_usuario@correo.com"
