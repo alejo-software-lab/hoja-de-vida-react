@@ -19,12 +19,15 @@ const Hero = () => {
           {/* Left Column - Info */}
            <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
              {/* Marca */}
-             <div className="flex items-center gap-2">
+             <div className="flex items-center gap-3">
                <img
                  src="/logo.png"
-                 alt="Alejandro Muñoz"
-                 className="h-9 w-auto"
+                 alt="Alejo Software Labs"
+                 className="h-14 w-auto"
                />
+               <span className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                 Alejo Software Labs
+               </span>
              </div>
 
              {/* Foto de perfil */}
