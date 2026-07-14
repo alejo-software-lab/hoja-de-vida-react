@@ -33,11 +33,7 @@ const About = () => {
             </h3>
             
              <p className="text-slate-650 dark:text-slate-350 text-base leading-relaxed">
-              Soy desarrollador de software en formación en CESDE, con una sólida base en lógica de programación y lenguajes clave. Estoy altamente motivado para aplicar mis conocimientos en proyectos reales, buscando activamente experiencia práctica en el ciclo de vida del desarrollo de software.
-            </p>
-            
-            <p className="text-slate-650 dark:text-slate-350 text-base leading-relaxed">
-              Poseo habilidades en Java, bases de datos y JavaScript. Disfruto trabajar en equipo, resolver problemas y adaptarme a nuevos entornos, con capacidad de aprendizaje continuo.
+              Técnico en Desarrollo de software en CESDE con una base sólida en lógica de programación, Java, JavaScript, base de datos SQL, manejo intermedio de la IA como herramienta de codificación, además de contar con habilidades blandas como el trabajo en equipo, el pensamiento crítico y la resolución de problemas a través de soluciones efectivas.
             </p>
 
             {/* Interests */}
