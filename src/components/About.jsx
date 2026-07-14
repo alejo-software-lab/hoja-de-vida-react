@@ -14,6 +14,13 @@ const About = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="flex justify-center mb-3">
+            <img
+              src="/logo.png"
+              alt="Alejandro Muñoz"
+              className="h-10 w-auto"
+            />
+          </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/55 text-indigo-600 dark:text-indigo-400 text-sm font-semibold mb-3">
             <User className="w-4 h-4" />
             <span>Quién Soy</span>

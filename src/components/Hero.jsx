@@ -18,6 +18,15 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column - Info */}
            <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+             {/* Marca */}
+             <div className="flex items-center gap-2">
+               <img
+                 src="/logo.png"
+                 alt="Alejandro Muñoz"
+                 className="h-9 w-auto"
+               />
+             </div>
+
              {/* Foto de perfil */}
              <div className="w-44 h-44 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
                <img

@@ -38,11 +38,11 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2">
               <a href="#inicio" className="flex items-center gap-2 group">
-                <img
-                  src="/alejo-software-labs.svg"
-                  alt="Alejo Software Labs"
-                  className="h-8 w-auto"
-                />
+                 <img
+                   src="/logo.png"
+                   alt="Alejandro Muñoz"
+                   className="h-8 w-auto"
+                 />
               </a>
           </div>
 
