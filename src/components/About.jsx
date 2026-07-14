@@ -33,7 +33,13 @@ const About = () => {
             </h3>
             
              <p className="text-slate-650 dark:text-slate-350 text-base leading-relaxed">
-              Técnico en Desarrollo de software en CESDE con una base sólida en lógica de programación, Java, JavaScript, base de datos SQL, manejo intermedio de la IA como herramienta de codificación, además de contar con habilidades blandas como el trabajo en equipo, el pensamiento crítico y la resolución de problemas a través de soluciones efectivas.
+              Soy una persona proactiva, curiosa y con sed de aprender. Tengo
+              facilidad para investigar, adaptarme rápido y aportar ideas que
+              sumen a mi equipo. Me considero responsable, ambicioso y con
+              excelente comunicación. Mi objetivo es crecer profesionalmente
+              mientras aporto valor, siendo parte de un equipo donde pueda
+              explotar al máximo mis habilidades y seguir llenándome de nuevas
+              experiencias.
             </p>
 
             {/* Interests */}
