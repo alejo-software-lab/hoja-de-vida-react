@@ -19,7 +19,7 @@ const About = () => {
             <span>Quién Soy</span>
           </div>
            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-            Un programador apasionado por construir soluciones de software sólidas
+              Un poco sobre mí
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-indigo-550 to-purple-550 mx-auto mt-4 rounded-full"></div>
         </div>
