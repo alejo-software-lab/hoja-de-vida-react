@@ -50,12 +50,14 @@ const Hero = () => {
                Desarrollador de Software
              </h2>
 
-             <p className="max-w-xl text-lg text-slate-600 dark:text-slate-450 leading-relaxed">
-               Estudiante de desarrollo de software en CESDE con una sólida base
-               en lógica de programación, Java, JavaScript y bases de datos SQL.
-               Altamente motivado para aplicar mis conocimientos en proyectos
-               reales y ganar experiencia en el ciclo de vida del desarrollo.
-             </p>
+              <p className="max-w-xl text-lg text-slate-600 dark:text-slate-450 leading-relaxed">
+                Técnico en Desarrollo de software en CESDE con una base sólida en
+                lógica de programación, Java, JavaScript, base de datos SQL, manejo
+                intermedio de la IA como herramienta de codificación, además de
+                contar con habilidades blandas como el trabajo en equipo, el
+                pensamiento crítico y la resolución de problemas a través de
+                soluciones efectivas.
+              </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
