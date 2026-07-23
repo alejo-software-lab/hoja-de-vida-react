@@ -8,14 +8,14 @@ env:
   - key: MAIL_TO
     value: "Alejandromg94@outlook.com"
   - key: SMTP_HOST
-    value: "smtp.example.com"
+    value: "smtp.office365.com"
   - key: SMTP_PORT
     value: "587"
   - key: SMTP_SECURE
     value: "false"
   - key: SMTP_USER
-    value: "tu_usuario@correo.com"
+    value: "Alejandromg94@outlook.com"
   - key: SMTP_PASS
-    value: "tu_contraseña_o_token"
+    value: "PON_AQUI_EL_PASSWORD_DE_APLICACION_EN_EL_DASHBOARD_DE_RENDER"
   - key: MAIL_FROM
-    value: "tu_usuario@correo.com"
+    value: "Alejandromg94@outlook.com"

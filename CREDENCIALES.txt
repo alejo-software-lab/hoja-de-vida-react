@@ -1,0 +1,256 @@
+================================================================================
+MIGRACIÓN BACKEND: NODE.JS → JAVA SPRING BOOT
+================================================================================
+
+FECHA DE MIGRACIÓN: 22/07/2026
+PROYECTO: Hoja de Vida React - Alejo Software
+
+================================================================================
+CAMBIOS REALIZADOS
+================================================================================
+
+1. BACKEND ELIMINADO (Node.js/Express):
+   - server/index.js → ELIMINADO
+   - server/messages.json → ELIMINADO (reemplazado por H2 Database)
+   - package.json: scripts "server" y "start" eliminados
+   - Dependencias eliminadas: express, cors, nodemailer (del backend)
+
+2. BACKEND NUEVO (Java Spring Boot 3.3.2):
+   - Estructura Maven estándar en src/main/java/com/alejosoftware/cv/
+   - Java 17
+   - Spring Boot 3.3.2
+   - Base de datos H2 (en memoria, para desarrollo)
+   - Spring Mail para envío de correos
+   - Spring Data JPA para persistencia
+   - Validación con Bean Validation
+   - Lombok para reducir boilerplate
+
+================================================================================
+ESTRUCTURA DEL NUEVO BACKEND
+================================================================================
+
+src/main/java/com/alejosoftware/cv/
+├── CvApplication.java                 # Clase principal Spring Boot
+├── config/
+│   └── CorsConfig.java               # Configuración CORS para React (puerto 5173)
+├── controller/
+│   └── ContactController.java        # REST API /api/contact
+├── dto/
+│   ├── ContactRequest.java           # DTO entrada (validación)
+│   └── ContactResponse.java          # DTO salida
+├── model/
+│   └── ContactMessage.java           # Entidad JPA
+├── repository/
+│   └── ContactMessageRepository.java # JPA Repository
+└── service/
+    ├── ContactService.java           # Lógica de negocio
+    └── EmailService.java             # Envío de correos con JavaMail
+
+src/main/resources/
+├── application.properties            # Configuración (ver abajo)
+
+================================================================================
+ENDPOINTS API
+================================================================================
+
+POST   /api/contact              # Enviar formulario de contacto
+GET    /api/contact/messages     # Listar todos los mensajes (admin)
+GET    /api/contact/count        # Contar mensajes totales
+
+Ejemplo Request (POST /api/contact):
+{
+  "name": "Juan Pérez",
+  "email": "juan@ejemplo.com",
+  "subject": "Consulta laboral",
+  "message": "Hola, me interesa tu perfil..."
+}
+
+Ejemplo Response (éxito):
+{
+  "ok": true,
+  "saved": true,
+  "emailSent": true,
+  "message": "Mensaje enviado correctamente"
+}
+
+Ejemplo Response (error validación):
+{
+  "ok": false,
+  "saved": false,
+  "emailSent": false,
+  "error": "El email no es válido"
+}
+
+================================================================================
+CONFIGURACIÓN (application.properties)
+================================================================================
+
+# Puerto del servidor
+server.port=8080
+
+# Base de datos H2 (desarrollo)
+spring.datasource.url=jdbc:h2:mem:cvdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# JPA/Hibernate
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+# CONFIGURACIÓN EMAIL (CREDENCIALES - CONFIGURAR EN PRODUCCIÓN)
+# ============================================================
+spring.mail.host=${SMTP_HOST:smtp.gmail.com}
+spring.mail.port=${SMTP_PORT:587}
+spring.mail.username=${SMTP_USER:TU_EMAIL@gmail.com}
+spring.mail.password=${SMTP_PASS:TU_APP_PASSWORD}
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+# Email remitente/destinatario
+app.mail.from=${MAIL_FROM:noreply@tudominio.com}
+app.mail.to=${MAIL_TO:alejandromg94@outlook.com}
+
+# CORS (frontend React en puerto 5173)
+app.cors.allowed-origins=http://localhost:5173,http://localhost:3000
+
+================================================================================
+CREDENCIALES PARA CONFIGURAR (VARIABLES DE ENTORNO)
+================================================================================
+
+Para que el envío de correos funcione en PRODUCCIÓN, configura estas variables
+de entorno en tu servidor (Railway, Render, VPS, etc.):
+
+┌─────────────────────┬──────────────────────────────────────────────────────┐
+│ VARIABLE            │ VALOR EJEMPLO (Gmail)                                │
+├─────────────────────┼──────────────────────────────────────────────────────┤
+│ SMTP_HOST           │ smtp.gmail.com                                       │
+│ SMTP_PORT           │ 587                                                  │
+│ SMTP_USER           │ tuemail@gmail.com                                    │
+│ SMTP_PASS           │ tu_app_password_de_gmail (NO tu contraseña normal)  │
+│ MAIL_FROM           │ tuemail@gmail.com                                    │
+│ MAIL_TO             │ alejandromg94@outlook.com (donde recibes mensajes)  │
+└─────────────────────┴──────────────────────────────────────────────────────┘
+
+IMPORTANTE - Gmail App Password:
+1. Activa 2FA en tu cuenta Google
+2. Ve a: https://myaccount.google.com/apppasswords
+3. Genera una "App Password" para "Correo"
+4. Usa esa contraseña de 16 caracteres en SMTP_PASS
+
+OTROS PROVEEDORES:
+- Outlook/Hotmail: smtp.office365.com:587
+- SendGrid: smtp.sendgrid.net:587 (user: apikey, pass: API_KEY)
+- Mailtrap (testing): smtp.mailtrap.io:2525
+
+================================================================================
+CÓMO EJECUTAR EL BACKEND
+================================================================================
+
+OPCIÓN 1: Maven Wrapper (recomendado)
+-------------------------------------
+cd hoja-de-vida-react
+./mvnw spring-boot:run
+
+OPCIÓN 2: Maven instalado globalmente
+-------------------------------------
+cd hoja-de-vida-react
+mvn spring-boot:run
+
+OPCIÓN 3: JAR ejecutable (producción)
+-------------------------------------
+cd hoja-de-vida-react
+mvn clean package
+java -jar target/hoja-de-vida-backend-1.0.0.jar
+
+El backend estará en: http://localhost:8080
+H2 Console: http://localhost:8080/h2-console
+  JDBC URL: jdbc:h2:mem:cvdb
+  User: sa
+  Password: (vacío)
+
+================================================================================
+CÓMO EJECUTAR EL FRONTEND (React + Vite)
+================================================================================
+
+cd hoja-de-vida-react
+npm install
+npm run dev
+
+Frontend en: http://localhost:5173
+Proxy configurado en vite.config.js → /api → http://localhost:8080
+
+================================================================================
+FAVICON
+================================================================================
+
+✅ favicon.ico creado en: public/favicon.ico
+   - Generado desde public/Favicon1.png
+   - Redimensionado a 32x32 píxeles
+   - Formato ICO real (2.7 KB)
+   - Los navegadores modernos lo detectarán automáticamente
+
+Para forzar actualización en navegador:
+- Chrome/Edge: Ctrl+Shift+R
+- Firefox: Ctrl+F5
+- O limpiar caché del sitio
+
+================================================================================
+DESPLIEGUE EN PRODUCCIÓN
+================================================================================
+
+BACKEND (Java):
+1. Configura variables de entorno SMTP_*
+2. Cambia BD H2 por PostgreSQL/MySQL en application-prod.properties
+3. mvn clean package -DskipTests
+4. java -jar target/hoja-de-vida-backend-1.0.0.jar
+
+FRONTEND (React):
+1. npm run build → genera carpeta dist/
+2. Sirve con Nginx/Apache o despliega en Vercel/Netlify
+3. Configura variable de entorno VITE_API_URL=https://tu-api.com
+
+================================================================================
+ARCHIVOS ELIMINADOS/MODIFICADOS
+================================================================================
+
+ELIMINADOS:
+- server/index.js
+- server/messages.json
+
+MODIFICADOS:
+- package.json: scripts "server" y "start" eliminados
+- vite.config.js: proxy actualizado a puerto 8080
+- public/favicon.ico: NUEVO (generado desde Favicon1.png)
+
+NUEVOS ARCHIVOS:
+- pom.xml (Maven)
+- src/main/java/com/alejosoftware/cv/* (todo el backend Java)
+- src/main/resources/application.properties
+- CREDENCIALES.txt (este archivo)
+
+================================================================================
+NOTAS ADICIONALES
+================================================================================
+
+- La BD H2 es en memoria. Los mensajes se pierden al reiniciar en desarrollo.
+  Para persistencia real, configurar PostgreSQL/MySQL en application-prod.properties.
+- Los mensajes se guardan en BD y también se envían por email si SMTP configurado.
+- CORS configurado para localhost:5173 (Vite) y localhost:3000 (Create React App).
+- Validación tanto en frontend (React Hook Form/Zod) como backend (Bean Validation).
+- Logs de email en nivel DEBUG (configurar en application.properties).
+
+================================================================================
+CONTACTO / SOPORTE
+================================================================================
+
+Desarrollador: Alejo Software
+Email: alejandromg94@outlook.com
+GitHub: https://github.com/alejosoftware
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================
