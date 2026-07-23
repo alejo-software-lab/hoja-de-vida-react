@@ -5,10 +5,8 @@ WORKDIR /app
 
 COPY pom.xml .
 COPY src ./src
-COPY mvnw .
-COPY .mvn .mvn
 
-RUN chmod +x mvnw && ./mvnw clean package -Pprod -DskipTests -B
+RUN mvn clean package -Pprod -DskipTests -B
 
 # ---- STAGE 2: RUNTIME ----
 FROM eclipse-temurin:21-jre-alpine
