@@ -11,7 +11,7 @@ echo.
 echo [1/2] Iniciando Backend Java (Spring Boot)...
 echo Puerto: http://localhost:8080
 echo.
-start "Backend Java" cmd /c "cd /d %~dp0 && mvn spring-boot:run"
+start "Backend Java" cmd /c "cd /d %~dp0 && .\mvnw.cmd spring-boot:run"
 
 echo [2/2] Iniciando Frontend React (Vite)...
 echo Puerto: http://localhost:5173

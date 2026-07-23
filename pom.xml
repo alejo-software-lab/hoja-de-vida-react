@@ -86,7 +86,7 @@
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>1.12.1</version>
                 <configuration>
-                    <workingDirectory>src/main/frontend</workingDirectory>
+                    <workingDirectory>${project.basedir}/src/main/frontend</workingDirectory>
                     <installDirectory>${project.build.directory}</installDirectory>
                 </configuration>
                 <executions>
@@ -139,7 +139,7 @@
                             <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/target/frontend/dist</directory>
+                                    <directory>${project.basedir}/src/main/frontend/dist</directory>
                                     <filtering>false</filtering>
                                 </resource>
                             </resources>
@@ -155,7 +155,11 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${project.basedir}/target/frontend</directory>
+                            <directory>${project.basedir}/src/main/frontend/node_modules</directory>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                        <fileset>
+                            <directory>${project.basedir}/src/main/frontend/dist</directory>
                             <followSymlinks>false</followSymlinks>
                         </fileset>
                     </filesets>

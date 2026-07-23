@@ -1,5 +1,7 @@
 package com.alejosoftware.cv.controller;
 
+import com.alejosoftware.cv.dto.ContactRequest;
+import com.alejosoftware.cv.dto.ContactResponse;
 import com.alejosoftware.cv.service.ContactService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

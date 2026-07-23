@@ -14,7 +14,7 @@ echo.
 
 echo [1/2] Construyendo frontend + backend con Maven...
 echo.
-call mvn clean package -Pprod
+call .\mvnw.cmd clean package -Pprod
 
 if %ERRORLEVEL% neq 0 (
     echo.

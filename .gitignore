@@ -7,15 +7,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
+node_modules/
 node_modules
-dist
-dist-ssr
+
+# Build output
+target/
+dist/
+dist-ssr/
 *.local
 
-# Editor directories and files
+# IDE directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
@@ -26,5 +31,40 @@ dist-ssr
 # Environment & runtime data
 .env
 .env.local
+.env.production
 server/messages.json
 
+# Java/Maven
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Frontend build
+src/main/frontend/node_modules/
+src/main/frontend/dist/
+src/main/frontend/dist-ssr/
+src/main/frontend/.env.local
+
+# Docker
+.docker/
+
+# OS files
+Thumbs.db
+.DS_Store
+Desktop.ini

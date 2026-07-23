@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -13,6 +15,8 @@ public class ContactResponse {
     private boolean ok;
     private boolean saved;
     private boolean emailSent;
+    private Long messageId;
+    private LocalDateTime receivedAt;
     private String message;
     private String error;
 }

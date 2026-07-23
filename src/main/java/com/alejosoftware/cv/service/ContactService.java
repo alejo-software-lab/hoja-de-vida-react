@@ -1,5 +1,7 @@
 package com.alejosoftware.cv.service;
 
+import com.alejosoftware.cv.dto.ContactRequest;
+import com.alejosoftware.cv.dto.ContactResponse;
 import com.alejosoftware.cv.model.ContactMessage;
 import com.alejosoftware.cv.repository.ContactMessageRepository;
 import jakarta.mail.MessagingException;
