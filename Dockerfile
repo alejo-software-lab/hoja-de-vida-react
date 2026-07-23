@@ -1,16 +1,28 @@
-# ---- STAGE 1: BUILD (Java + React) ----
-FROM maven:3.9.8-eclipse-temurin-21 AS builder
+# ---- STAGE 1: BUILD FRONTEND (Node 22) ----
+FROM node:22-alpine AS frontend
 
-RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+
+COPY src/main/frontend/package*.json ./
+RUN npm ci
+
+COPY src/main/frontend/ ./
+RUN npm run build
+
+# ---- STAGE 2: BUILD BACKEND (Java 21) ----
+FROM maven:3.9.8-eclipse-temurin-21 AS backend
 
 WORKDIR /app
 
 COPY pom.xml .
-COPY src ./src
+COPY src/main/java src/main/java
+COPY src/main/resources src/main/resources
 
-RUN mvn clean package -Pprod -DskipTests -B
+COPY --from=frontend /app/dist src/main/resources/static
 
-# ---- STAGE 2: RUNTIME ----
+RUN mvn clean package -Pdev -DskipTests -B
+
+# ---- STAGE 3: RUNTIME ----
 FROM eclipse-temurin:21-jre-alpine
 
 RUN apk add --no-cache curl
@@ -20,7 +32,7 @@ RUN addgroup -g 1001 -S appgroup && \
 
 WORKDIR /app
 
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=backend /app/target/*.jar app.jar
 
 RUN mkdir -p /data && chown -R appuser:appgroup /data /app
 
