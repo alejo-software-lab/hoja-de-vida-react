@@ -1,6 +1,8 @@
 # ---- STAGE 1: BUILD (Java + React) ----
 FROM maven:3.9.8-eclipse-temurin-21 AS builder
 
+RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY pom.xml .
