@@ -12,6 +12,8 @@ RUN npm run build
 # ---- STAGE 2: BUILD BACKEND (Java 21) ----
 FROM maven:3.9.8-eclipse-temurin-21 AS backend
 
+ARG CACHE_BUST=1
+
 WORKDIR /app
 
 COPY pom.xml .
