@@ -68,7 +68,7 @@ const Contact = () => {
     try {
       await emailjs.send(
         EMAILJS_SERVICE_ID,
-        "template_portafolio",
+        "template_1txr2jd",
         {
           from_name: formData.name,
           from_email: formData.email,
