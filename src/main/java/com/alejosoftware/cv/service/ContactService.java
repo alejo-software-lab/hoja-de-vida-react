@@ -25,7 +25,7 @@ public class ContactService {
     private final ContactMessageRepository messageRepository;
     private final JavaMailSender mailSender;
 
-    @Value("${app.mail.from:no-reply@alejosoftware.com}")
+    @Value("${app.mail.from:alejosoftwarelabs@gmail.com}")
     private String mailFrom;
 
     @Value("${app.mail.to:alejosoftwarelabs@gmail.com}")
