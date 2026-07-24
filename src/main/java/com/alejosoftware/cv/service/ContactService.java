@@ -4,26 +4,26 @@ import com.alejosoftware.cv.dto.ContactRequest;
 import com.alejosoftware.cv.dto.ContactResponse;
 import com.alejosoftware.cv.model.ContactMessage;
 import com.alejosoftware.cv.repository.ContactMessageRepository;
-import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class ContactService {
 
     private final ContactMessageRepository messageRepository;
-    private final JavaMailSender mailSender;
+
+    @Autowired(required = false)
+    private JavaMailSender mailSender;
 
     @Value("${app.mail.from:alejosoftwarelabs@gmail.com}")
     private String mailFrom;
@@ -33,6 +33,10 @@ public class ContactService {
 
     @Value("${app.mail.enabled:true}")
     private boolean mailEnabled;
+
+    public ContactService(ContactMessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 
     @Transactional
     public ContactResponse saveMessage(ContactRequest request) {
@@ -46,14 +50,14 @@ public class ContactService {
         message = messageRepository.save(message);
 
         boolean emailSent = false;
-        if (mailEnabled) {
+        if (mailEnabled && mailSender != null) {
             try {
                 sendEmail(message);
                 emailSent = true;
                 message.setEmailSent(true);
                 messageRepository.save(message);
-            } catch (MessagingException e) {
-                log.error("Error sending email: ", e);
+            } catch (Exception e) {
+                log.error("Error sending email for message ID {}: {}", message.getId(), e.getMessage());
             }
         }
 
@@ -66,7 +70,7 @@ public class ContactService {
                 .build();
     }
 
-    private void sendEmail(ContactMessage message) throws MessagingException {
+    private void sendEmail(ContactMessage message) throws Exception {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
