@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   Mail,
   MapPin,
@@ -9,6 +10,9 @@ import {
   CheckCircle2,
   Phone,
 } from "lucide-react";
+
+const EMAILJS_SERVICE_ID = "service_apeyqkc";
+const EMAILJS_PUBLIC_KEY = "32cHoh6lAn6OMgNP7";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -48,21 +52,42 @@ const Contact = () => {
     if (!validate()) return;
 
     setIsSubmitting(true);
+    let savedToDb = false;
+
     try {
-      const res = await fetch("/api/contact", {
+      await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        throw new Error(data.error || "Error al enviar el mensaje.");
-      }
+      savedToDb = true;
+    } catch {
+      // Continue even if DB save fails
+    }
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        "template_portafolio",
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
       setSubmitSuccess(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (err) {
-      setErrors({ message: "No se pudo enviar el mensaje. Intenta de nuevo." });
+      if (savedToDb) {
+        setSubmitSuccess(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setSubmitSuccess(false), 5000);
+      } else {
+        setErrors({ message: "No se pudo enviar el mensaje. Intenta de nuevo." });
+      }
     } finally {
       setIsSubmitting(false);
     }
