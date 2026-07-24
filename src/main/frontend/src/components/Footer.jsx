@@ -83,7 +83,7 @@ const Footer = () => {
               <Globe className="w-5 h-5" />
             </a>
             <a
-              href="mailto:Alejandromg94@outlook.com"
+              href="mailto:alejosoftwarelabs@gmail.com"
               className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white transition-colors"
               aria-label="Email"
             >

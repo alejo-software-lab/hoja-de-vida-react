@@ -28,7 +28,7 @@ public class ContactService {
     @Value("${app.mail.from:no-reply@alejosoftware.com}")
     private String mailFrom;
 
-    @Value("${app.mail.to:alejandromg94@outlook.com}")
+    @Value("${app.mail.to:alejosoftwarelabs@gmail.com}")
     private String mailTo;
 
     @Value("${app.mail.enabled:true}")

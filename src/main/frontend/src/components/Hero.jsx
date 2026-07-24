@@ -109,7 +109,7 @@ const Hero = () => {
                  <Globe className="w-6 h-6" />
                </a>
                <a
-                 href="mailto:Alejandromg94@outlook.com"
+                 href="mailto:alejosoftwarelabs@gmail.com"
                  className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-md transition-all duration-300"
                  aria-label="Email"
                >

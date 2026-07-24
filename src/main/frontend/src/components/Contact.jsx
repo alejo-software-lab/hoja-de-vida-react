@@ -61,7 +61,7 @@ const Contact = () => {
       if (!data.emailSent) {
         setErrors({
           message:
-            "Tu mensaje fue guardado, pero el correo no se pudo enviar automáticamente. Escríbeme directamente a Alejandromg94@outlook.com.",
+            "Tu mensaje fue guardado, pero el correo no se pudo enviar automáticamente. Escríbeme directamente a alejosoftwarelabs@gmail.com.",
         });
         return;
       }
@@ -112,7 +112,7 @@ const Contact = () => {
               <div className="space-y-4">
                 {/* Email Address */}
                 <a
-                  href="mailto:Alejandromg94@outlook.com"
+                  href="mailto:alejosoftwarelabs@gmail.com"
                   className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 hover:border-indigo-500 hover:scale-[1.01] transition-all duration-300 group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-950/55 text-indigo-600 dark:text-indigo-450 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all">
@@ -123,7 +123,7 @@ const Contact = () => {
                       Envíame un correo
                     </span>
                     <span className="text-sm font-bold text-slate-750 dark:text-white">
-                      Alejandromg94@outlook.com
+                      alejosoftwarelabs@gmail.com
                     </span>
                   </div>
                 </a>
