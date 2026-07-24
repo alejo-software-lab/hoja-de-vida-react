@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -49,44 +49,44 @@ public class ContactService {
 
         message = messageRepository.save(message);
 
-        boolean emailSent = false;
         if (mailEnabled && mailSender != null) {
-            try {
-                sendEmail(message);
-                emailSent = true;
-                message.setEmailSent(true);
-                messageRepository.save(message);
-            } catch (Exception e) {
-                log.error("Error sending email for message ID {}: {}", message.getId(), e.getMessage());
-            }
+            sendEmailAsync(message);
         }
 
         return ContactResponse.builder()
                 .ok(true)
                 .saved(true)
-                .emailSent(emailSent)
+                .emailSent(false)
                 .messageId(message.getId())
                 .receivedAt(message.getReceivedAt())
                 .build();
     }
 
-    private void sendEmail(ContactMessage message) throws Exception {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+    @Async
+    public void sendEmailAsync(ContactMessage message) {
+        try {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-        helper.setFrom(mailFrom);
-        helper.setTo(mailTo);
-        helper.setReplyTo(message.getEmail());
-        helper.setSubject("[CV] " + message.getSubject());
+            helper.setFrom(mailFrom);
+            helper.setTo(mailTo);
+            helper.setReplyTo(message.getEmail());
+            helper.setSubject("[CV] " + message.getSubject());
 
-        String textContent = String.format(
-                "Nombre: %s\nCorreo: %s\n\n%s",
-                message.getName(), message.getEmail(), message.getMessage()
-        );
-        helper.setText(textContent);
+            String textContent = String.format(
+                    "Nombre: %s\nCorreo: %s\n\n%s",
+                    message.getName(), message.getEmail(), message.getMessage()
+            );
+            helper.setText(textContent);
 
-        mailSender.send(mimeMessage);
-        log.info("Email sent successfully for message ID: {}", message.getId());
+            mailSender.send(mimeMessage);
+            log.info("Email sent successfully for message ID: {}", message.getId());
+
+            message.setEmailSent(true);
+            messageRepository.save(message);
+        } catch (Exception e) {
+            log.error("Error sending email for message ID {}: {}", message.getId(), e.getMessage());
+        }
     }
 
     public List<ContactMessage> getAllMessages() {

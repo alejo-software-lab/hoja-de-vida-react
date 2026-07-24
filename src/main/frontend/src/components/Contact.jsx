@@ -58,13 +58,6 @@ const Contact = () => {
       if (!res.ok || !data.ok) {
         throw new Error(data.error || "Error al enviar el mensaje.");
       }
-      if (!data.emailSent) {
-        setErrors({
-          message:
-            "Tu mensaje fue guardado, pero el correo no se pudo enviar automáticamente. Escríbeme directamente a alejosoftwarelabs@gmail.com.",
-        });
-        return;
-      }
       setSubmitSuccess(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setSubmitSuccess(false), 5000);
