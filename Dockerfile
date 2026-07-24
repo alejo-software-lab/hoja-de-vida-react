@@ -47,6 +47,6 @@ ENV JAVA_OPTS="-Xms256m -Xmx512m"
 EXPOSE 10000
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD curl -f http://localhost:10000/api/contact/count || exit 1
+  CMD curl -f http://localhost:10000/api/health || exit 1
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

@@ -5,7 +5,7 @@ services:
     plan: free
     buildCommand: "./mvnw clean package -Pprod -DskipTests"
     startCommand: "java -jar target/hoja-de-vida-backend-1.0.0.jar"
-    healthCheckPath: "/api/contact/count"
+    healthCheckPath: "/api/health"
     envVars:
       - key: JAVA_VERSION
         value: "21"
