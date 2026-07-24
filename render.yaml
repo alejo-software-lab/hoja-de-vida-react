@@ -29,3 +29,5 @@ services:
         value: "alejosoftwarelabs@gmail.com"
       - key: CORS_ALLOWED_ORIGINS
         sync: false
+      - key: WEB3FORMS_ACCESS_KEY
+        sync: false

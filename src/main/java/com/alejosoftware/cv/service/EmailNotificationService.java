@@ -2,67 +2,66 @@ package com.alejosoftware.cv.service;
 
 import com.alejosoftware.cv.model.ContactMessage;
 import com.alejosoftware.cv.repository.ContactMessageRepository;
-import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Slf4j
 public class EmailNotificationService {
 
-    @Autowired(required = false)
-    private JavaMailSender mailSender;
+    private static final String WEB3FORMS_URL = "https://api.web3forms.com/submit";
+    private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${app.mail.from:alejosoftwarelabs@gmail.com}")
-    private String mailFrom;
+    @Value("${web3forms.access-key:}")
+    private String accessKey;
 
     @Value("${app.mail.to:alejosoftwarelabs@gmail.com}")
     private String mailTo;
 
-    @Value("${app.mail.enabled:true}")
-    private boolean mailEnabled;
-
     @Async
     public void sendContactEmail(ContactMessage message, ContactMessageRepository repository) {
-        log.info("Attempting to send email for message ID: {} to: {}, mailSender is null: {}", 
-                 message.getId(), mailTo, mailSender == null);
+        log.info("Attempting to send email via Web3Forms for message ID: {}", message.getId());
 
-        if (!mailEnabled) {
-            log.info("Mail disabled, skipping send");
-            return;
-        }
-        if (mailSender == null) {
-            log.warn("JavaMailSender is null, cannot send email");
+        if (accessKey == null || accessKey.isBlank()) {
+            log.warn("Web3Forms access key not configured, skipping email");
             return;
         }
 
         try {
-            MimeMessage mimeMessage = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            Map<String, String> body = new HashMap<>();
+            body.put("access_key", accessKey);
+            body.put("to", mailTo);
+            body.put("subject", "[CV] " + message.getSubject());
+            body.put("from_name", message.getName());
+            body.put("email", message.getEmail());
+            body.put("message", message.getMessage());
+            body.put("botcheck", "");
 
-            helper.setFrom(mailFrom);
-            helper.setTo(mailTo);
-            helper.setReplyTo(message.getEmail());
-            helper.setSubject("[CV] " + message.getSubject());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-            String textContent = String.format(
-                    "Nombre: %s\nCorreo: %s\n\n%s",
-                    message.getName(), message.getEmail(), message.getMessage()
-            );
-            helper.setText(textContent);
+            HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
 
-            mailSender.send(mimeMessage);
-            log.info("EMAIL_SENT_OK for message ID: {}", message.getId());
+            ResponseEntity<String> response = restTemplate.postForEntity(WEB3FORMS_URL, request, String.class);
 
-            message.setEmailSent(true);
-            repository.save(message);
+            if (response.getStatusCode().is2xxSuccessful()) {
+                log.info("EMAIL_SENT_OK via Web3Forms for message ID: {}", message.getId());
+                message.setEmailSent(true);
+                repository.save(message);
+            } else {
+                log.error("EMAIL_SEND_FAILED via Web3Forms for message ID: {} - HTTP {}",
+                        message.getId(), response.getStatusCode());
+            }
         } catch (Exception e) {
-            log.error("EMAIL_SEND_FAILED for message ID {}: {} - {}", message.getId(), e.getClass().getName(), e.getMessage(), e);
+            log.error("EMAIL_SEND_FAILED for message ID {}: {} - {}",
+                    message.getId(), e.getClass().getName(), e.getMessage(), e);
         }
     }
 }
