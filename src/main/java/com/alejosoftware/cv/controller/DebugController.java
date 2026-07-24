@@ -73,4 +73,33 @@ public class DebugController {
 
         return result;
     }
+
+    @GetMapping("/email-logs")
+    public Map<String, Object> emailLogs() {
+        Map<String, Object> result = new LinkedHashMap<>();
+
+        if (apiKey == null || apiKey.isBlank()) {
+            result.put("status", "ERROR");
+            result.put("message", "API key not configured");
+            return result;
+        }
+
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setBearerAuth(apiKey);
+            HttpEntity<Void> request = new HttpEntity<>(headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    RESEND_API_URL, HttpMethod.GET, request, String.class);
+
+            result.put("httpStatus", response.getStatusCode().value());
+            result.put("emails", response.getBody());
+        } catch (Exception e) {
+            result.put("status", "ERROR");
+            result.put("errorMessage", e.getMessage());
+        }
+
+        return result;
+    }
 }
