@@ -17,3 +17,5 @@ services:
         sync: false
       - key: MAIL_TO
         value: "alejosoftwarelabs@gmail.com"
+      - key: RESEND_API_KEY
+        sync: false

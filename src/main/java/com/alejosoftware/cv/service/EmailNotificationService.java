@@ -10,49 +10,79 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 @Slf4j
 public class EmailNotificationService {
 
+    private static final String RESEND_API_URL = "https://api.resend.com/emails";
     private final RestTemplate restTemplate = new RestTemplate();
+
+    @Value("${resend.api-key:}")
+    private String apiKey;
 
     @Value("${app.mail.to:alejosoftwarelabs@gmail.com}")
     private String mailTo;
 
     @Async
     public void sendContactEmail(ContactMessage message, ContactMessageRepository repository) {
-        String url = "https://formsubmit.co/ajax/" + mailTo;
-        log.info("Attempting to send email via FormSubmit for message ID: {} to: {}", message.getId(), mailTo);
+        log.info("Attempting to send email via Resend for message ID: {}", message.getId());
+
+        if (apiKey == null || apiKey.isBlank()) {
+            log.warn("Resend API key not configured, skipping email");
+            return;
+        }
 
         try {
-            Map<String, String> body = new HashMap<>();
-            body.put("name", message.getName());
-            body.put("email", message.getEmail());
+            Map<String, Object> body = new HashMap<>();
+            body.put("from", "CV Website <onboarding@resend.dev>");
+            body.put("to", List.of(mailTo));
+            body.put("reply_to", message.getEmail());
             body.put("subject", "[CV] " + message.getSubject());
-            body.put("message", message.getMessage());
-            body.put("_captcha", "false");
-            body.put("_template", "table");
+            body.put("html", buildHtml(message));
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(apiKey);
 
-            HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
+            HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
 
-            ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(RESEND_API_URL, request, String.class);
 
             if (response.getStatusCode().is2xxSuccessful()) {
-                log.info("EMAIL_SENT_OK via FormSubmit for message ID: {}", message.getId());
+                log.info("EMAIL_SENT_OK via Resend for message ID: {}", message.getId());
                 message.setEmailSent(true);
                 repository.save(message);
             } else {
-                log.error("EMAIL_SEND_FAILED via FormSubmit for message ID: {} - HTTP {}",
-                        message.getId(), response.getStatusCode());
+                log.error("EMAIL_SEND_FAILED via Resend for message ID: {} - HTTP {} - {}",
+                        message.getId(), response.getStatusCode(), response.getBody());
             }
         } catch (Exception e) {
             log.error("EMAIL_SEND_FAILED for message ID {}: {} - {}",
                     message.getId(), e.getClass().getName(), e.getMessage(), e);
         }
+    }
+
+    private String buildHtml(ContactMessage message) {
+        return """
+                <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+                  <h2 style="color:#333;">Nuevo mensaje de contacto</h2>
+                  <table style="width:100%;border-collapse:collapse;">
+                    <tr><td style="padding:8px;font-weight:bold;">Nombre:</td><td style="padding:8px;">%s</td></tr>
+                    <tr><td style="padding:8px;font-weight:bold;">Email:</td><td style="padding:8px;">%s</td></tr>
+                    <tr><td style="padding:8px;font-weight:bold;">Asunto:</td><td style="padding:8px;">%s</td></tr>
+                  </table>
+                  <div style="margin-top:16px;padding:16px;background:#f5f5f5;border-radius:8px;">
+                    %s
+                  </div>
+                </div>
+                """.formatted(
+                message.getName(),
+                message.getEmail(),
+                message.getSubject(),
+                message.getMessage().replace("\n", "<br>")
+        );
     }
 }
