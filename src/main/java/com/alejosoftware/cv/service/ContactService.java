@@ -64,6 +64,9 @@ public class ContactService {
 
     @Async
     public void sendEmailAsync(ContactMessage message) {
+        log.info("Attempting to send email for message ID: {} to: {}", message.getId(), mailTo);
+        log.info("Mail sender null? {}", mailSender == null);
+        log.info("Mail enabled? {}, from: {}, to: {}", mailEnabled, mailFrom, mailTo);
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -80,12 +83,12 @@ public class ContactService {
             helper.setText(textContent);
 
             mailSender.send(mimeMessage);
-            log.info("Email sent successfully for message ID: {}", message.getId());
+            log.info("EMAIL_SENT_OK for message ID: {}", message.getId());
 
             message.setEmailSent(true);
             messageRepository.save(message);
         } catch (Exception e) {
-            log.error("Error sending email for message ID {}: {}", message.getId(), e.getMessage());
+            log.error("EMAIL_SEND_FAILED for message ID {}: {} - {}", message.getId(), e.getClass().getName(), e.getMessage(), e);
         }
     }
 
