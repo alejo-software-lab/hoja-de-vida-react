@@ -17,52 +17,43 @@ import java.util.Map;
 @Slf4j
 public class DebugController {
 
-    private static final String WEB3FORMS_URL = "https://api.web3forms.com/submit";
-
-    @Value("${web3forms.access-key:}")
-    private String accessKey;
+    @Value("${app.mail.to:alejosoftwarelabs@gmail.com}")
+    private String mailTo;
 
     @GetMapping("/email-test")
     public Map<String, Object> testEmail() {
         Map<String, Object> result = new LinkedHashMap<>();
+        String url = "https://formsubmit.co/ajax/" + mailTo;
 
-        result.put("service", "Web3Forms");
-        result.put("accessKeyConfigured", accessKey != null && !accessKey.isBlank());
-
-        if (accessKey == null || accessKey.isBlank()) {
-            result.put("status", "ERROR");
-            result.put("message", "Web3Forms access key not configured. Set WEB3FORMS_ACCESS_KEY env var.");
-            return result;
-        }
+        result.put("service", "FormSubmit.co");
+        result.put("url", url);
 
         try {
             RestTemplate restTemplate = new RestTemplate();
 
             Map<String, String> body = new HashMap<>();
-            body.put("access_key", accessKey);
-            body.put("to", "alejosoftwarelabs@gmail.com");
+            body.put("name", "Debug Test");
+            body.put("email", mailTo);
             body.put("subject", "[TEST] Debug email from CV backend");
-            body.put("from_name", "Debug Test");
-            body.put("email", "alejosoftwarelabs@gmail.com");
-            body.put("message", "This is a test email sent from the debug endpoint at " + java.time.Instant.now());
-            body.put("botcheck", "");
+            body.put("message", "This is a test email from the debug endpoint at " + java.time.Instant.now());
+            body.put("_captcha", "false");
+            body.put("_template", "table");
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
 
-            ResponseEntity<String> response = restTemplate.postForEntity(WEB3FORMS_URL, request, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
             result.put("httpStatus", response.getStatusCode().value());
             result.put("response", response.getBody());
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 result.put("status", "OK");
-                result.put("message", "Email sent successfully! Check your inbox/spam.");
+                result.put("message", "Email sent! Check inbox and spam. First time you may need to confirm a link from FormSubmit.");
             } else {
                 result.put("status", "ERROR");
-                result.put("message", "Non-2xx response from Web3Forms");
             }
         } catch (Exception e) {
             result.put("status", "ERROR");
