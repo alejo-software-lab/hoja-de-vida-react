@@ -1,9 +1,13 @@
 import React from "react";
 import { ArrowDown, Code2, Globe, Mail, ExternalLink } from "lucide-react";
+import { useAnimate } from "../hooks/useAnimate";
 
 const Hero = () => {
+  const { ref, visible } = useAnimate(0.1);
+
   return (
     <section
+      ref={ref}
       id="inicio"
       className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden bg-gradient-to-b from-indigo-50/30 via-slate-50 to-slate-50 dark:from-indigo-950/20 dark:via-slate-950 dark:to-slate-950"
     >
@@ -17,7 +21,7 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column - Info */}
-           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+           <div className={`lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
              {/* Marca */}
              <div className="flex items-center gap-3">
                <img
@@ -31,7 +35,7 @@ const Hero = () => {
              </div>
 
              {/* Foto de perfil */}
-             <div className="w-44 h-44 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+             <div className={`w-44 h-44 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center transition-all duration-700 delay-200 ${visible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                <img
                  src="/foto-alejo.jpg"
                  alt="Foto de Alejandro Muñoz"
@@ -46,23 +50,23 @@ const Hero = () => {
                </span>
              </div>
 
-             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200/50 dark:border-indigo-800/50 text-indigo-600 dark:text-indigo-400 font-semibold text-sm animate-fade-in">
+             <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200/50 dark:border-indigo-800/50 text-indigo-600 dark:text-indigo-400 font-semibold text-sm transition-all duration-700 delay-300 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
               <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span>
               <span>Disponible para nuevos proyectos</span>
             </div>
 
-             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+             <h1 className={`text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight transition-all duration-700 delay-[400ms] ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                Hola, soy{" "}
                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400">
                  Alejandro Muñoz
                </span>
              </h1>
 
-             <h2 className="text-2xl sm:text-3xl font-bold text-slate-700 dark:text-slate-300">
+             <h2 className={`text-2xl sm:text-3xl font-bold text-slate-700 dark:text-slate-300 transition-all duration-700 delay-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                Desarrollador de Software
              </h2>
 
-              <p className="max-w-xl text-lg text-slate-600 dark:text-slate-450 leading-relaxed">
+              <p className={`max-w-xl text-lg text-slate-600 dark:text-slate-450 leading-relaxed transition-all duration-700 delay-[600ms] ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 Técnico en Desarrollo de software en CESDE con una base sólida en
                 lógica de programación, Java, JavaScript, base de datos SQL, manejo
                 intermedio de la IA como herramienta de codificación, además de
@@ -72,29 +76,29 @@ const Hero = () => {
               </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <div className={`flex flex-col sm:flex-row gap-4 w-full sm:w-auto transition-all duration-700 delay-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <a
                 href="#proyectos"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-600/30 dark:shadow-indigo-900/30 hover:shadow-indigo-600/40 transition-all duration-300 transform hover:-translate-y-0.5 group"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-600/30 dark:shadow-indigo-900/30 hover:shadow-indigo-600/40 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group"
               >
                 <span>Ver Mis Proyectos</span>
                 <ExternalLink className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#contacto"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-550 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-50 dark:hover:bg-slate-900 transition-all duration-300 transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-700 dark:text-slate-300 font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
               >
                 Contáctame
               </a>
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-4 pt-4">
+            <div className={`flex items-center gap-4 pt-4 transition-all duration-700 delay-[800ms] ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                  <a
-                 href="https://github.com"
+                 href="https://github.com/alejo-software-lab"
                  target="_blank"
                  rel="noreferrer"
-                 className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-md transition-all duration-300"
+                 className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 hover:-rotate-6 transition-all duration-300"
                  aria-label="GitHub"
                >
                  <Code2 className="w-6 h-6" />
@@ -103,14 +107,14 @@ const Hero = () => {
                  href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395"
                  target="_blank"
                  rel="noreferrer"
-                 className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-md transition-all duration-300"
+                 className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 hover:rotate-6 transition-all duration-300"
                  aria-label="LinkedIn"
                >
                  <Globe className="w-6 h-6" />
                </a>
                <a
                  href="mailto:alejosoftwarelabs@gmail.com"
-                 className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-md transition-all duration-300"
+                 className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 hover:-rotate-6 transition-all duration-300"
                  aria-label="Email"
                >
                  <Mail className="w-6 h-6" />
@@ -119,14 +123,14 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Visual Terminal */}
-          <div className="lg:col-span-5 relative w-full flex justify-center animate-slide-up">
-            <div className="w-full max-w-lg bg-slate-900 dark:bg-slate-950 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm leading-relaxed text-slate-350">
+          <div className={`lg:col-span-5 relative w-full flex justify-center transition-all duration-1000 delay-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
+            <div className="w-full max-w-lg bg-slate-900 dark:bg-slate-950 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm leading-relaxed text-slate-350 hover:shadow-indigo-500/10 transition-shadow duration-500">
               {/* Terminal Title Bar */}
               <div className="flex items-center justify-between px-4 py-3 bg-slate-850 border-b border-slate-800">
                 <div className="flex space-x-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-rose-500 hover:scale-125 transition-transform"></div>
+                  <div className="w-3 h-3 rounded-full bg-amber-500 hover:scale-125 transition-transform"></div>
+                  <div className="w-3 h-3 rounded-full bg-emerald-500 hover:scale-125 transition-transform"></div>
                 </div>
                  <div className="text-xs text-slate-500">
                    developer.json — alejandro-munoz
@@ -184,11 +188,11 @@ const Hero = () => {
         </div>
 
         {/* Scroll Down Indicator */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-slate-450 text-sm">
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-slate-450 text-sm animate-bounce">
           <span className="text-xs font-semibold tracking-widest uppercase opacity-70">
             Desplazar
           </span>
-          <ArrowDown className="w-4 h-4 animate-bounce text-indigo-500" />
+          <ArrowDown className="w-4 h-4 text-indigo-500" />
         </div>
       </div>
     </section>

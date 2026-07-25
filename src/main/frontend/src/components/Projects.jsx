@@ -1,5 +1,6 @@
 import React from "react";
 import { FolderGit2, ExternalLink } from "lucide-react";
+import { useAnimate } from "../hooks/useAnimate";
 
 const GithubIcon = ({ className }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -8,14 +9,17 @@ const GithubIcon = ({ className }) => (
 );
 
 const Projects = () => {
+  const { ref, visible } = useAnimate(0.15);
+
   return (
     <section
+      ref={ref}
       id="proyectos"
       className="py-24 bg-slate-50 dark:bg-slate-900 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/55 text-indigo-600 dark:text-indigo-400 text-sm font-semibold mb-3">
             <FolderGit2 className="w-4 h-4" />
             <span>Portafolio</span>
@@ -30,14 +34,14 @@ const Projects = () => {
         </div>
 
         {/* GitHub Card */}
-        <div className="flex justify-center">
+        <div className={`flex justify-center transition-all duration-700 delay-200 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <a
             href="https://github.com/alejo-software-lab"
             target="_blank"
             rel="noreferrer"
-            className="flex flex-col items-center gap-6 p-10 rounded-3xl bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-850 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group max-w-md w-full"
+            className="flex flex-col items-center gap-6 p-10 rounded-3xl bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-850 shadow-sm hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 group max-w-md w-full"
           >
-            <div className="w-20 h-20 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center group-hover:bg-indigo-50 dark:group-hover:bg-indigo-950/30 group-hover:border-indigo-200 dark:group-hover:border-indigo-800 transition-all duration-300">
+            <div className="w-20 h-20 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center group-hover:bg-indigo-50 dark:group-hover:bg-indigo-950/30 group-hover:border-indigo-200 dark:group-hover:border-indigo-800 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
               <GithubIcon className="w-10 h-10 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
             </div>
             <div className="text-center">
@@ -48,9 +52,10 @@ const Projects = () => {
                 Visita mi perfil de GitHub para ver todos mis repositorios, contribuciones y proyectos open source.
               </p>
             </div>
-            <span className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-600/20 transition-all duration-300">
+            <span className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-600/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-indigo-600/40">
               <GithubIcon className="w-5 h-5" />
               <span>Ver en GitHub</span>
+              <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </span>
           </a>
         </div>
