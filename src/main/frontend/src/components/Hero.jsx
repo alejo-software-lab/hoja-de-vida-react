@@ -14,6 +14,7 @@ const Hero = () => {
       setTimeout(() => setStep(3), 500),
       setTimeout(() => setStep(4), 700),
       setTimeout(() => setStep(5), 900),
+      setTimeout(() => setStep(6), 1100),
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -35,6 +36,18 @@ const Hero = () => {
           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
 
             <div className={fade(1)}>
+              <div className="w-44 h-44 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:scale-105 hover:shadow-2xl transition-all duration-500">
+                <img
+                  src="/foto-alejo.jpg"
+                  alt="Foto de Alejandro Muñoz"
+                  className="w-full h-full object-contain scale-[1.06]"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'flex'; }}
+                />
+                <span className="hidden w-full h-full items-center justify-center text-slate-400 text-sm font-medium">Tu foto</span>
+              </div>
+            </div>
+
+            <div className={fade(2)}>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
                 Hola, soy{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400">
@@ -43,13 +56,13 @@ const Hero = () => {
               </h1>
             </div>
 
-            <div className={fade(2)}>
+            <div className={fade(3)}>
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-700 dark:text-slate-300">
                 Desarrollador de Software
               </h2>
             </div>
 
-            <div className={fade(3)}>
+            <div className={fade(4)}>
               <p className="max-w-xl text-lg text-slate-600 dark:text-slate-450 leading-relaxed">
                 Técnico en Desarrollo de software en CESDE con una base sólida en
                 lógica de programación, Java, JavaScript, base de datos SQL, manejo
@@ -60,7 +73,7 @@ const Hero = () => {
               </p>
             </div>
 
-            <div className={fade(4)}>
+            <div className={fade(5)}>
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <a href="#proyectos" className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-105 transition-all duration-300 group">
                   <span>Ver Mis Proyectos</span>
@@ -76,7 +89,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className={fade(5)}>
+            <div className={fade(6)}>
               <div className="flex items-center gap-4 pt-4">
                 <a href="https://github.com/alejo-software-lab" target="_blank" rel="noreferrer" className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 transition-all duration-300">
                   <Code2 className="w-6 h-6" />
@@ -92,7 +105,7 @@ const Hero = () => {
           </div>
 
           {/* Terminal */}
-          <div className={`lg:col-span-5 relative w-full flex justify-center transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${step >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <div className={`lg:col-span-5 relative w-full flex justify-center transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${step >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
             <div className="w-full max-w-lg bg-slate-900 dark:bg-slate-950 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm leading-relaxed text-slate-350 hover:shadow-indigo-500/20 hover:border-slate-700 transition-all duration-500">
               <div className="flex items-center justify-between px-4 py-3 bg-slate-850 border-b border-slate-800">
                 <div className="flex space-x-2">
