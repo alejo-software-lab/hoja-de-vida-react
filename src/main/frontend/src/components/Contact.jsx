@@ -79,7 +79,7 @@ const Contact = () => {
                 {contactItems.map((item, idx) => (
                   <ScrollReveal key={idx} delay={300 + idx * 100} direction="left">
                     <a href={item.href || "#"} target={item.href ? undefined : "_blank"} rel="noreferrer"
-                      className={`flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 ${item.hoverBorder} hover:scale-[1.03] hover:shadow-xl transition-all duration-300 group ${!item.href ? 'pointer-events-none' : ''}`}>
+                      className={`flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 ${item.hoverBorder} hover:shadow-lg transition-all duration-300 group ${!item.href ? 'pointer-events-none' : ''}`}>
                       <div className={`w-12 h-12 rounded-xl bg-${item.color}-100 dark:bg-${item.color}-950/55 text-${item.color}-600 dark:text-${item.color}-450 flex items-center justify-center group-hover:bg-${item.color}-600 group-hover:text-white group-hover:scale-110 transition-all duration-300`}>{item.icon}</div>
                       <div><span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">{item.label}</span><span className="text-sm font-bold text-slate-750 dark:text-white">{item.value}</span></div>
                     </a>
@@ -88,7 +88,7 @@ const Contact = () => {
 
                 <ScrollReveal delay={600} direction="left">
                   <a href="https://wa.me/573507779458" target="_blank" rel="noreferrer"
-                    className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 hover:border-emerald-500 hover:scale-[1.03] hover:shadow-xl transition-all duration-300 group">
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 group">
                     <div className="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/55 text-emerald-600 dark:text-emerald-450 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white group-hover:scale-110 transition-all duration-300">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.744-6.27C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
                     </div>
@@ -109,10 +109,10 @@ const Contact = () => {
               <div>
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4">Sígueme o búscame</span>
                 <div className="flex gap-4">
-                  <a href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:scale-125 hover:-rotate-12 hover:shadow-lg transition-all duration-300">
+                   <a href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-lg transition-all duration-300">
                     <Globe className="w-5 h-5" />
                   </a>
-                  <a href="https://github.com/alejo-software-lab" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:scale-125 hover:rotate-12 hover:shadow-lg transition-all duration-300">
+                   <a href="https://github.com/alejo-software-lab" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-lg transition-all duration-300">
                     <Code2 className="w-5 h-5" />
                   </a>
                 </div>

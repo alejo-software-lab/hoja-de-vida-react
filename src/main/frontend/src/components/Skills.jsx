@@ -80,13 +80,13 @@ const Skills = () => {
           {filteredSkills.map((skill, index) => (
             <div
               key={skill.name}
-              className={`p-6 rounded-3xl bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-850 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.03] transition-all duration-500 group ${
+              className={`p-6 rounded-3xl bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-850 shadow-sm hover:shadow-xl transition-all duration-300 group ${
                 barsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-2xl bg-slate-50 dark:bg-slate-900 flex items-center justify-center flex-shrink-0 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-400">
+                <div className="w-14 h-14 rounded-2xl bg-slate-50 dark:bg-slate-900 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                   {skill.icon}
                 </div>
                 <div className="flex-grow">

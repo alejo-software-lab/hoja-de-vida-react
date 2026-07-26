@@ -23,9 +23,9 @@ const Footer = () => {
               ))}
             </div>
             <div className="flex items-center gap-4">
-              <a href="https://github.com/alejo-software-lab" target="_blank" rel="noreferrer" className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white hover:scale-125 hover:-rotate-12 transition-all duration-300"><Code2 className="w-5 h-5" /></a>
-              <a href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395" target="_blank" rel="noreferrer" className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white hover:scale-125 hover:rotate-12 transition-all duration-300"><Globe className="w-5 h-5" /></a>
-              <a href="mailto:alejosoftwarelabs@gmail.com" className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white hover:scale-125 hover:-rotate-12 transition-all duration-300"><Mail className="w-5 h-5" /></a>
+              <a href="https://github.com/alejo-software-lab" target="_blank" rel="noreferrer" className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white hover:scale-110 transition-all duration-300"><Code2 className="w-5 h-5" /></a>
+              <a href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395" target="_blank" rel="noreferrer" className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white hover:scale-110 transition-all duration-300"><Globe className="w-5 h-5" /></a>
+              <a href="mailto:alejosoftwarelabs@gmail.com" className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white hover:scale-110 transition-all duration-300"><Mail className="w-5 h-5" /></a>
             </div>
           </div>
         </ScrollReveal>

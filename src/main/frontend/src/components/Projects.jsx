@@ -25,8 +25,8 @@ const Projects = () => {
         <ScrollReveal direction="scale" delay={200}>
           <div className="flex justify-center">
             <a href="https://github.com/alejo-software-lab" target="_blank" rel="noreferrer"
-              className="flex flex-col items-center gap-6 p-10 rounded-3xl bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-850 shadow-sm hover:shadow-2xl hover:-translate-y-4 hover:scale-[1.03] transition-all duration-500 group max-w-md w-full">
-              <div className="w-20 h-20 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center group-hover:bg-indigo-50 dark:group-hover:bg-indigo-950/30 group-hover:border-indigo-300 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
+              className="flex flex-col items-center gap-6 p-10 rounded-3xl bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-850 shadow-sm hover:shadow-xl transition-all duration-300 group max-w-md w-full">
+              <div className="w-20 h-20 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center group-hover:bg-indigo-50 dark:group-hover:bg-indigo-950/30 group-hover:border-indigo-300 group-hover:scale-110 transition-all duration-300">
                 <GithubIcon className="w-10 h-10 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
               </div>
               <div className="text-center">

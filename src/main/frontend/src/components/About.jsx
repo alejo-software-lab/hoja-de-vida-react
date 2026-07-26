@@ -51,7 +51,7 @@ const About = () => {
             <div className="grid grid-cols-3 gap-4 pt-4">
               {stats.map((stat, idx) => (
                 <ScrollReveal key={idx} delay={400 + idx * 150} direction="scale">
-                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 text-center hover:scale-110 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-default">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 text-center hover:shadow-lg transition-all duration-300 cursor-default">
                     <div className="flex justify-center mb-2">{stat.icon}</div>
                     <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">{stat.count}</div>
                     <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">{stat.label}</div>
@@ -63,8 +63,8 @@ const About = () => {
 
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
             <ScrollReveal direction="right" delay={300}>
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-indigo-50/50 to-white dark:from-indigo-950/20 dark:to-slate-900 border border-slate-100 dark:border-slate-850 shadow-sm hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.03] transition-all duration-400 group">
-                <div className="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-400">
+              <div className="p-6 rounded-3xl bg-gradient-to-br from-indigo-50/50 to-white dark:from-indigo-950/20 dark:to-slate-900 border border-slate-100 dark:border-slate-850 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Code2 className="w-6 h-6" />
                 </div>
                 <h4 className="text-lg font-bold text-slate-800 dark:text-white mb-2 group-hover:text-indigo-600 transition-colors">Desarrollo Frontend</h4>
@@ -73,8 +73,8 @@ const About = () => {
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={450}>
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-purple-50/50 to-white dark:from-purple-950/20 dark:to-slate-900 border border-slate-100 dark:border-slate-850 shadow-sm hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.03] transition-all duration-400 group">
-                <div className="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-400">
+              <div className="p-6 rounded-3xl bg-gradient-to-br from-purple-50/50 to-white dark:from-purple-950/20 dark:to-slate-900 border border-slate-100 dark:border-slate-850 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div className="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </div>
                 <h4 className="text-lg font-bold text-slate-800 dark:text-white mb-2 group-hover:text-purple-600 transition-colors">Backend con Java & Spring Boot</h4>
@@ -83,8 +83,8 @@ const About = () => {
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={600}>
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-pink-50/50 to-white dark:from-pink-950/20 dark:to-slate-900 border border-slate-100 dark:border-slate-850 shadow-sm hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.03] transition-all duration-400 group">
-                <div className="w-12 h-12 rounded-2xl bg-pink-100 dark:bg-pink-900/40 text-pink-600 dark:text-pink-400 flex items-center justify-center mb-4 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-400">
+              <div className="p-6 rounded-3xl bg-gradient-to-br from-pink-50/50 to-white dark:from-pink-950/20 dark:to-slate-900 border border-slate-100 dark:border-slate-850 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div className="w-12 h-12 rounded-2xl bg-pink-100 dark:bg-pink-900/40 text-pink-600 dark:text-pink-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
                 <h4 className="text-lg font-bold text-slate-800 dark:text-white mb-2 group-hover:text-pink-600 transition-colors">Bases de Datos SQL</h4>
@@ -93,8 +93,8 @@ const About = () => {
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={750}>
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-50/50 to-white dark:from-emerald-950/20 dark:to-slate-900 border border-slate-100 dark:border-slate-850 shadow-sm hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.03] transition-all duration-400 group">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-400">
+              <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-50/50 to-white dark:from-emerald-950/20 dark:to-slate-900 border border-slate-100 dark:border-slate-850 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                 </div>
                 <h4 className="text-lg font-bold text-slate-800 dark:text-white mb-2 group-hover:text-emerald-600 transition-colors">Trabajo en Equipo</h4>
