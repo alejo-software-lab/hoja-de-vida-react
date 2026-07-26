@@ -14,8 +14,8 @@ const Footer = () => {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-200/50 dark:border-slate-900/50">
             <div className="flex items-center gap-2 group">
-              <img src="/alejoS.png" alt="Alejo Software Labs" className="h-4 w-4 sm:h-5 sm:w-5 rounded" />
-              <span className="font-bold text-sm sm:text-base text-indigo-600 dark:text-indigo-400">Alejo Software Labs</span>
+              <img src="/alejoS.png" alt="Alejo Software Labs" className="h-6 w-6 sm:h-7 sm:w-7 rounded" />
+              <span className="font-bold text-base sm:text-lg text-indigo-600 dark:text-indigo-400">Alejo Software Labs</span>
             </div>
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-slate-500 dark:text-slate-400">
               {["inicio", "sobre-mi", "habilidades", "experiencia", "proyectos", "contacto"].map((id) => (
