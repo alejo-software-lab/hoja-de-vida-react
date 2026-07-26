@@ -30,5 +30,5 @@ html {
 }
 
 .card-hover {
-  @apply hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
+  @apply hover:shadow-xl hover:scale-[1.02] transition-all duration-300;
 }

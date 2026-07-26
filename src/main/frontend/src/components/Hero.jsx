@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowDown, Code2, Globe, Mail, ExternalLink } from "lucide-react";
+import { ArrowDown, Code2, Globe, Mail, ExternalLink, Download } from "lucide-react";
+
+const CV_LINK = "/alejandro-muñozgodoy-hv.pdf";
 
 const Hero = () => {
   const [step, setStep] = useState(0);
@@ -20,7 +22,7 @@ const Hero = () => {
   }, []);
 
   const fade = (n, extra = '') =>
-    `transition-all duration-1000 ease-out ${step >= n ? `opacity-100 translate-y-0 ${extra}` : 'opacity-0 translate-y-12'}`;
+    `transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${step >= n ? `opacity-100 translate-y-0 ${extra}` : 'opacity-0 translate-y-4'}`;
 
   return (
     <section
@@ -91,11 +93,15 @@ const Hero = () => {
 
             <div className={fade(7)}>
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <a href="#proyectos" className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 group">
+                <a href="#proyectos" className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-105 transition-all duration-300 group">
                   <span>Ver Mis Proyectos</span>
                   <ExternalLink className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
-                <a href="#contacto" className="inline-flex items-center justify-center px-8 py-4 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-300 font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                <a href={CV_LINK} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center px-8 py-4 rounded-2xl border-2 border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:scale-105 transition-all duration-300 group">
+                  <Download className="w-5 h-5 mr-2" />
+                  <span>Descargar CV</span>
+                </a>
+                <a href="#contacto" className="inline-flex items-center justify-center px-8 py-4 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-300 font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:scale-105 transition-all duration-300">
                   Contáctame
                 </a>
               </div>
@@ -103,13 +109,13 @@ const Hero = () => {
 
             <div className={fade(8)}>
               <div className="flex items-center gap-4 pt-4">
-                <a href="https://github.com/alejo-software-lab" target="_blank" rel="noreferrer" className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 hover:-rotate-6 transition-all duration-300">
+                <a href="https://github.com/alejo-software-lab" target="_blank" rel="noreferrer" className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 transition-all duration-300">
                   <Code2 className="w-6 h-6" />
                 </a>
-                <a href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395" target="_blank" rel="noreferrer" className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 hover:rotate-6 transition-all duration-300">
+                <a href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395" target="_blank" rel="noreferrer" className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 transition-all duration-300">
                   <Globe className="w-6 h-6" />
                 </a>
-                <a href="mailto:alejosoftwarelabs@gmail.com" className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 hover:-rotate-6 transition-all duration-300">
+                <a href="mailto:alejosoftwarelabs@gmail.com" className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-lg hover:scale-110 transition-all duration-300">
                   <Mail className="w-6 h-6" />
                 </a>
               </div>
@@ -117,7 +123,7 @@ const Hero = () => {
           </div>
 
           {/* Terminal */}
-          <div className={`lg:col-span-5 relative w-full flex justify-center transition-all duration-1200 ease-out ${step >= 4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+          <div className={`lg:col-span-5 relative w-full flex justify-center transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${step >= 4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
             <div className="w-full max-w-lg bg-slate-900 dark:bg-slate-950 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm leading-relaxed text-slate-350 hover:shadow-indigo-500/20 hover:border-slate-700 transition-all duration-500">
               <div className="flex items-center justify-between px-4 py-3 bg-slate-850 border-b border-slate-800">
                 <div className="flex space-x-2">
@@ -146,7 +152,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-slate-450 text-sm animate-bounce">
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-slate-450 text-sm animate-pulse">
           <span className="text-xs font-semibold tracking-widest uppercase opacity-70">Desplazar</span>
           <ArrowDown className="w-4 h-4 text-indigo-500" />
         </div>

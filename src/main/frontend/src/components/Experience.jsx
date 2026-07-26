@@ -54,7 +54,7 @@ const Experience = () => {
                 <div className="hidden md:block absolute -left-32 top-1.5 w-24 text-right">
                   <span className="text-sm font-bold text-indigo-600 dark:text-indigo-450">{exp.period}</span>
                 </div>
-                <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 hover:border-indigo-300 dark:hover:border-indigo-900/40 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-400">
+                <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 hover:border-indigo-300 dark:hover:border-indigo-900/40 shadow-sm hover:shadow-2xl hover:scale-[1.02] transition-all duration-400">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                     <div>
                       <h3 className="text-xl font-bold text-slate-850 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{exp.role}</h3>

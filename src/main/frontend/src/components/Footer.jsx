@@ -1,6 +1,8 @@
 import React from "react";
-import { ArrowUp, Code2, Globe, Mail } from "lucide-react";
+import { ArrowUp, Code2, Globe, Mail, Download } from "lucide-react";
 import { ScrollReveal } from "../hooks/useAnimate";
+
+const CV_LINK = "/alejandro-muñozgodoy-hv.pdf";
 
 const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -31,9 +33,14 @@ const Footer = () => {
         <ScrollReveal delay={100}>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-400">
             <p>© {new Date().getFullYear()} DevPortfolio. Todos los derechos reservados.</p>
-            <button onClick={scrollToTop} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-650 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/45 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold hover:scale-110 hover:-translate-y-1 hover:shadow-md transition-all duration-300 shadow-sm">
-              <span>Subir</span><ArrowUp className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-3">
+              <a href={CV_LINK} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 font-semibold hover:scale-110 transition-all duration-300">
+                <Download className="w-4 h-4" /><span>Descargar CV</span>
+              </a>
+              <button onClick={scrollToTop} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-650 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/45 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold hover:scale-110 hover:shadow-md transition-all duration-300 shadow-sm">
+                <span>Subir</span><ArrowUp className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </ScrollReveal>
       </div>
