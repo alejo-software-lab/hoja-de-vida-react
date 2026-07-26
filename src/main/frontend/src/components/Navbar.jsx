@@ -28,7 +28,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         <div className="flex items-center justify-between h-12 sm:h-16">
           <div className="flex-shrink-0 flex items-center gap-2">
             <a href="#inicio" className="flex items-center gap-2 group">
-              <img src="/alejoS.png" alt="Alejo Software Labs" className="h-12 w-12 sm:h-14 sm:w-14 rounded" />
+              <img src="/alejoS.png" alt="Alejo Software Labs" className="h-14 w-14 sm:h-16 sm:w-16 rounded" />
               <span className="hidden sm:inline font-bold text-base sm:text-lg tracking-tight text-indigo-600 dark:text-indigo-400">Alejo Software Labs</span>
             </a>
           </div>
