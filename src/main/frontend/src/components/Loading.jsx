@@ -26,7 +26,7 @@ const Loading = ({ onComplete }) => {
   return (
     <div className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-950 transition-opacity duration-500 ${progress >= 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
       <div className="flex flex-col items-center gap-6">
-        <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+        <img src="/alejoS.png" alt="Logo" className="h-10 w-auto" />
         <div className="w-48 h-1.5 bg-slate-800 rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-150 ease-out"
