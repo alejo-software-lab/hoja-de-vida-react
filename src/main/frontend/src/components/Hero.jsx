@@ -23,12 +23,11 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className={`lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 sm:space-y-6 transition-all duration-700 ease-out ${show ? 'opacity-100' : 'opacity-0'}`}>
 
-            <div className="w-36 h-36 sm:w-48 sm:h-48 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+            <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
               <img
                 src="/foto-alejo.jpg"
                 alt="Foto de Alejandro Muñoz"
                 className="w-full h-full object-cover"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
               />
             </div>
 
