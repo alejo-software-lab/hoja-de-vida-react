@@ -15,10 +15,6 @@ const About = () => {
 
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="flex flex-col items-center gap-2 mb-3">
-              <img src="/logo.png" alt="Alejo Software Labs" className="h-16 w-auto" />
-              <span className="text-lg font-bold text-slate-700 dark:text-slate-300">Alejo Software Labs</span>
-            </div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/55 text-indigo-600 dark:text-indigo-400 text-sm font-semibold mb-3">
               <User className="w-4 h-4" />
               <span>Quién Soy</span>
