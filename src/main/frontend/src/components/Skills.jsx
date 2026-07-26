@@ -21,6 +21,7 @@ const Skills = () => {
     { id: 'frontend', label: 'Frontend' },
     { id: 'backend', label: 'Backend' },
     { id: 'herramientas', label: 'Herramientas' },
+    { id: 'ia', label: 'IA / ML' },
   ];
 
   const skillList = [
@@ -34,6 +35,11 @@ const Skills = () => {
     { name: 'JavaScript (ES6+)', category: 'frontend', level: 50, color: 'from-yellow-400 to-amber-500', icon: <svg className="w-8 h-8 text-yellow-400 rounded bg-slate-900" viewBox="0 0 448 512" fill="currentColor"><path d="M0 32v448h448V32H0zm243.8 349.4c0 43.6-25.6 76.1-75.4 76.1-55.7 0-77.9-28-81.8-58h44.1c3.1 16.9 15.3 27.8 37.5 27.8 22.8 0 32.8-11.9 32.8-31.9 0-48.4-74.1-16.2-74.1-84.4 0-35.3 21.6-60.6 62.2-60.6 37.2 0 60 17.5 65 47h-40.9c-4.4-15-13.8-21.6-25.3-21.6-17.5 0-21.6 11.2-21.6 23.4 0 43.1 74.1 13.1 74.1 81.6zm113.7 4.1c0 38.4-20.3 62.8-57.5 62.8-38.4 0-57.8-21.6-61.9-52h42.8c3.1 13.8 12.8 21.9 23.8 21.9 13.8 0 19.4-7.5 19.4-18.4 0-30-51.2-12.5-51.2-68.4 0-31.2 19.7-53.1 50.9-53.1 31.9 0 48.4 15.9 52.8 45.3h-40.9c-2.2-11.2-8.1-16.9-15.6-16.9-10.9 0-14.7 7.2-14.7 15.6 0 25.9 49.7 9.7 49.7 63.2z"/></svg> },
     { name: 'Lógica de Programación', category: 'backend', level: 50, color: 'from-indigo-500 to-violet-500', icon: <svg className="w-8 h-8 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg> },
     { name: 'VS Code / IntelliJ', category: 'herramientas', level: 50, color: 'from-sky-400 to-blue-500', icon: <svg className="w-8 h-8 text-sky-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13H5.5L12 6.5z"/></svg> },
+    { name: 'OpenAI API / Gemini API', category: 'ia', level: 40, color: 'from-violet-500 to-fuchsia-500', icon: <svg className="w-8 h-8 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2a7 7 0 0 0-7 7c0 3 1.5 5.5 4 7v4l3-2 3 2v-4c2.5-1.5 4-4 4-7a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/></svg> },
+    { name: 'LangChain', category: 'ia', level: 35, color: 'from-emerald-400 to-cyan-500', icon: <svg className="w-8 h-8 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="12" r="3"/><line x1="8" y1="12" x2="16" y2="12"/></svg> },
+    { name: 'GitHub Copilot / Cursor', category: 'ia', level: 45, color: 'from-blue-400 to-indigo-500', icon: <svg className="w-8 h-8 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> },
+    { name: 'Prompt Engineering', category: 'ia', level: 50, color: 'from-amber-400 to-orange-500', icon: <svg className="w-8 h-8 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> },
+    { name: 'Pandas / NumPy / Scikit-Learn', category: 'ia', level: 38, color: 'from-teal-400 to-emerald-500', icon: <svg className="w-8 h-8 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> },
   ];
 
   const filteredSkills = activeTab === 'todos' ? skillList : skillList.filter(s => s.category === activeTab);
