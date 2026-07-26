@@ -14,7 +14,7 @@ const Footer = () => {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-200/50 dark:border-slate-900/50">
             <div className="flex items-center gap-2 group">
-              <img src="/alejoS.png" alt="Alejo Software Labs" className="h-6 sm:h-8 w-auto" />
+              <img src="/alejoS.png" alt="Alejo Software Labs" className="h-5 sm:h-6 w-auto" />
               <span className="font-bold text-base sm:text-xl text-indigo-600 dark:text-indigo-400">Alejo Software Labs</span>
             </div>
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-slate-500 dark:text-slate-400">
