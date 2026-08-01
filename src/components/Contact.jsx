@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+import React, { useState, useEffect, useRef } from "react";
+>>>>>>> ebb14621001fcb95805e7f04303a44f9db42afab
 import {
   Mail,
   MapPin,
@@ -9,7 +13,119 @@ import {
   Phone,
 } from "lucide-react";
 
+// Base del API: en dev queda vacía y el proxy de Vite redirige /api al servicio
+// Node local; en producción apunta al Web Service de Render (VITE_API_URL).
+const API_BASE = import.meta.env.VITE_API_URL || "";
+
+// Cloudflare Turnstile (captcha anti-bot). Opcional: si no hay site key, no se
+// carga nada y el formulario funciona solo con honeypot + rate-limit del servidor.
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
+
 const Contact = () => {
+<<<<<<< HEAD
+=======
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    company: "", // honeypot: oculto para humanos, los bots lo rellenan
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
+  const turnstileRef = useRef(null);
+  const widgetId = useRef(null);
+
+  // Carga el script de Turnstile y renderiza el widget solo si hay site key.
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return;
+    const render = () => {
+      if (!window.turnstile || !turnstileRef.current || widgetId.current !== null) return;
+      widgetId.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+      });
+    };
+    if (window.turnstile) {
+      render();
+      return;
+    }
+    const src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    let script = document.querySelector(`script[src="${src}"]`);
+    if (!script) {
+      script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+    script.addEventListener("load", render);
+    return () => script.removeEventListener("load", render);
+  }, []);
+
+  const validate = () => {
+    let tempErrors = {};
+    if (!formData.name.trim()) tempErrors.name = "El nombre es requerido.";
+    if (!formData.email.trim()) {
+      tempErrors.email = "El correo es requerido.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      tempErrors.email = "El correo no es válido.";
+    }
+    if (!formData.subject.trim())
+      tempErrors.subject = "El asunto es requerido.";
+    if (!formData.message.trim())
+      tempErrors.message = "El mensaje es requerido.";
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (errors[name]) setErrors({ ...errors, [name]: "" });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setIsSubmitting(true);
+    try {
+      const turnstileToken =
+        TURNSTILE_SITE_KEY && window.turnstile
+          ? window.turnstile.getResponse(widgetId.current)
+          : undefined;
+
+      const res = await fetch(`${API_BASE}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, turnstileToken }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        // El servidor puede devolver errores por campo o un mensaje general.
+        if (data.errors) setErrors(data.errors);
+        else setErrors({ message: data.error || "No se pudo enviar el mensaje. Intenta de nuevo." });
+        return;
+      }
+
+      setSubmitSuccess(true);
+      setFormData({ name: "", email: "", subject: "", message: "", company: "" });
+      setTimeout(() => setSubmitSuccess(false), 5000);
+    } catch (err) {
+      console.error(err);
+      setErrors({ message: "No se pudo conectar con el servidor. Intenta más tarde." });
+    } finally {
+      // Un token de Turnstile es de un solo uso: resetea para el próximo envío.
+      if (TURNSTILE_SITE_KEY && window.turnstile && widgetId.current !== null) {
+        window.turnstile.reset(widgetId.current);
+      }
+      setIsSubmitting(false);
+    }
+  };
+
+>>>>>>> ebb14621001fcb95805e7f04303a44f9db42afab
   return (
     <section
       id="contacto"
@@ -120,6 +236,7 @@ const Contact = () => {
             </p>
           </div>
 
+<<<<<<< HEAD
           {/* Social Network Links */}
           <div className="text-center pt-4">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4">
@@ -144,6 +261,175 @@ const Contact = () => {
               >
                 <Code2 className="w-5 h-5" />
               </a>
+=======
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot anti-bot: oculto para humanos, no debe rellenarse */}
+                <input
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  tabIndex="-1"
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
+                {/* Row: Name and Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {/* Name field */}
+                  <div className="space-y-1.5">
+                    <label
+                      htmlFor="name"
+                      className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                    >
+                      Nombre Completo
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Ej. Juan Pérez"
+                      className={`w-full px-4 py-3.5 rounded-2xl bg-white dark:bg-slate-950 border text-slate-850 dark:text-white placeholder-slate-400 dark:placeholder-slate-650 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all ${
+                        errors.name
+                          ? "border-rose-500"
+                          : "border-slate-200 dark:border-slate-850 focus:border-indigo-550"
+                      }`}
+                    />
+                    {errors.name && (
+                      <span className="text-rose-500 text-xs font-semibold">
+                        {errors.name}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Email field */}
+                  <div className="space-y-1.5">
+                    <label
+                      htmlFor="email"
+                      className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                    >
+                      Correo Electrónico
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Ej. juan@correo.com"
+                      className={`w-full px-4 py-3.5 rounded-2xl bg-white dark:bg-slate-950 border text-slate-850 dark:text-white placeholder-slate-400 dark:placeholder-slate-650 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all ${
+                        errors.email
+                          ? "border-rose-500"
+                          : "border-slate-200 dark:border-slate-850 focus:border-indigo-550"
+                      }`}
+                    />
+                    {errors.email && (
+                      <span className="text-rose-500 text-xs font-semibold">
+                        {errors.email}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Subject field */}
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="subject"
+                    className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                  >
+                    Asunto
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Ej. Oferta de empleo / Proyecto freelance"
+                    className={`w-full px-4 py-3.5 rounded-2xl bg-white dark:bg-slate-950 border text-slate-850 dark:text-white placeholder-slate-400 dark:placeholder-slate-650 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all ${
+                      errors.subject
+                        ? "border-rose-500"
+                        : "border-slate-200 dark:border-slate-850 focus:border-indigo-550"
+                    }`}
+                  />
+                  {errors.subject && (
+                    <span className="text-rose-500 text-xs font-semibold">
+                      {errors.subject}
+                    </span>
+                  )}
+                </div>
+
+                {/* Message field */}
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="message"
+                    className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                  >
+                    Mensaje
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="5"
+                    placeholder="Escribe tu mensaje con detalles aquí..."
+                    className={`w-full px-4 py-3.5 rounded-2xl bg-white dark:bg-slate-950 border text-slate-850 dark:text-white placeholder-slate-400 dark:placeholder-slate-650 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all resize-none ${
+                      errors.message
+                        ? "border-rose-500"
+                        : "border-slate-200 dark:border-slate-850 focus:border-indigo-550"
+                    }`}
+                  ></textarea>
+                  {errors.message && (
+                    <span className="text-rose-500 text-xs font-semibold">
+                      {errors.message}
+                    </span>
+                  )}
+                </div>
+
+                {/* Turnstile: se renderiza aquí solo si hay VITE_TURNSTILE_SITE_KEY */}
+                {TURNSTILE_SITE_KEY && <div ref={turnstileRef} className="min-h-[65px]" />}
+
+                {/* Submit button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/20 dark:shadow-indigo-900/20 hover:shadow-indigo-600/30 transition-all duration-300 disabled:cursor-not-allowed group"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg
+                        className="animate-spin h-5 w-5 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      <span>Enviando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Enviar Mensaje</span>
+                      <Send className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5" />
+                    </>
+                  )}
+                </button>
+              </form>
+>>>>>>> ebb14621001fcb95805e7f04303a44f9db42afab
             </div>
           </div>
         </div>

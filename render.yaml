@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 buildCommand: "npm install && npm run build"
 startCommand: "npx serve -s dist -l $PORT"
 healthCheckPath: "/"
@@ -8,3 +9,44 @@ env:
     value: "kqfbqsj"
   - key: VITE_EMAILJS_USER_ID
     value: "TU_USER_ID"
+=======
+# Blueprint de Render: sitio estático (siempre activo) + API de correo (Node).
+# El backend Java/Spring Boot fue reemplazado por el servicio Node de ./api.
+services:
+  # --- Frontend estático (Vite). No se duerme. ---
+  - type: web
+    name: cv-frontend
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      # URL pública del API. Ajusta al dominio real del servicio cv-contact-api.
+      - key: VITE_API_URL
+        value: https://cv-contact-api.onrender.com
+    routes:
+      # SPA: cualquier ruta cae en index.html
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  # --- API de contacto (Node sin dependencias). ---
+  - type: web
+    name: cv-contact-api
+    runtime: node
+    rootDir: api
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: RESEND_API_KEY
+        sync: false            # secreto: se define en el panel de Render
+      - key: MAIL_TO
+        value: alejosoftwarelabs@gmail.com
+      - key: MAIL_FROM
+        value: CV Website <onboarding@resend.dev>
+      - key: ALLOWED_ORIGINS
+        value: https://cv-frontend.onrender.com
+      # - key: TURNSTILE_SECRET   # opcional, captcha anti-bot
+      #   sync: false
+>>>>>>> ebb14621001fcb95805e7f04303a44f9db42afab
