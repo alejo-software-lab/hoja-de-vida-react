@@ -19,11 +19,11 @@ const Hero = () => {
           {/* Left Column - Info */}
            <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
              {/* Marca */}
-             <div className="flex items-center gap-3">
+             <div className="flex items-center gap-3 justify-center">
                <img
                  src="/logo.png"
                  alt="Alejo Software Labs"
-                 className="h-[600px] w-auto max-w-full object-contain"
+                 className="h-[900px] w-auto object-contain"
                  width="1000"
                  height="546"
                />
