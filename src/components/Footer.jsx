@@ -14,11 +14,11 @@ const Footer = () => {
           <div className="flex items-center gap-2">
             <img
               src="/logo.png"
-              alt="Alejo Software Labs"
-              className="h-16 w-auto"
+              alt="Alejandro Muñoz"
+              className="h-10 w-auto"
             />
-            <span className="font-bold text-xl text-indigo-600 dark:text-indigo-400">
-              Alejo Software Labs
+            <span className="font-bold text-lg text-indigo-600 dark:text-indigo-400">
+              Alejandro Muñoz
             </span>
           </div>
 
@@ -53,12 +53,6 @@ const Footer = () => {
               className="hover:text-indigo-600 dark:hover:text-indigo-450 transition-colors"
             >
               Proyectos
-            </a>
-            <a
-              href="#contacto"
-              className="hover:text-indigo-600 dark:hover:text-indigo-450 transition-colors"
-            >
-              Contacto
             </a>
           </div>
 
@@ -95,7 +89,7 @@ const Footer = () => {
         {/* Copyright and back to top */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-400">
           <p>
-            © {new Date().getFullYear()} DevPortfolio. Todos los derechos
+            © {new Date().getFullYear()} Alejandro Muñoz. Todos los derechos
             reservados. Creado con React y Tailwind CSS.
           </p>
 
