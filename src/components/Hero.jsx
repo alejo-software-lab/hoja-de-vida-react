@@ -23,7 +23,9 @@ const Hero = () => {
                <img
                  src="/logo.png"
                  alt="Alejo Software Labs"
-                 className="h-100 w-auto"
+                 className="h-100 w-auto object-contain"
+                 width="1000"
+                 height="546"
                />
                <span className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                  Alejo Software Labs
