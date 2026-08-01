@@ -1,5 +1,5 @@
 buildCommand: "npm install && npm run build"
-startCommand: "npx serve -s dist -l 10000"
+startCommand: "npx serve -s dist -l $PORT"
 healthCheckPath: "/"
 env:
   - key: VITE_EMAILJS_SERVICE_ID
