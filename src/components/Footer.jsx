@@ -59,7 +59,7 @@ const Footer = () => {
           {/* Social icons */}
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/alejo-software-lab"
               target="_blank"
               rel="noreferrer"
               className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white transition-colors"

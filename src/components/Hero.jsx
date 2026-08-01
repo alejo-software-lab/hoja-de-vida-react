@@ -80,7 +80,7 @@ const Hero = () => {
             {/* Social Links */}
             <div className="flex items-center gap-4 pt-4">
               <a
-                href="https://github.com"
+                href="https://github.com/alejo-software-lab"
                 target="_blank"
                 rel="noreferrer"
                 className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-md transition-all duration-300"

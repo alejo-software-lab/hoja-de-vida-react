@@ -41,13 +41,6 @@ html.dark #app-loader {
   gap: 24px;
 }
 
-.app-loader__logo {
-  width: 120px;
-  height: auto;
-  opacity: 0;
-  animation: app-loader-fade-in 0.5s ease 0.1s forwards;
-}
-
 .app-loader__spinner {
   width: 32px;
   height: 32px;
@@ -60,17 +53,6 @@ html.dark #app-loader {
 @keyframes app-loader-spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes app-loader-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
