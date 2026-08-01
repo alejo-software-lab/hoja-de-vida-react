@@ -66,6 +66,12 @@ public class EmailNotificationService {
     }
 
     private String buildHtml(ContactMessage message) {
+        String safeName = org.springframework.web.util.HtmlUtils.htmlEscape(message.getName() != null ? message.getName() : "");
+        String safeEmail = org.springframework.web.util.HtmlUtils.htmlEscape(message.getEmail() != null ? message.getEmail() : "");
+        String safeSubject = org.springframework.web.util.HtmlUtils.htmlEscape(message.getSubject() != null ? message.getSubject() : "");
+        String safeMessage = org.springframework.web.util.HtmlUtils.htmlEscape(message.getMessage() != null ? message.getMessage() : "")
+                .replace("\n", "<br>");
+
         return """
                 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
                   <h2 style="color:#333;">Nuevo mensaje de contacto</h2>
@@ -78,11 +84,6 @@ public class EmailNotificationService {
                     %s
                   </div>
                 </div>
-                """.formatted(
-                message.getName(),
-                message.getEmail(),
-                message.getSubject(),
-                message.getMessage().replace("\n", "<br>")
-        );
+                """.formatted(safeName, safeEmail, safeSubject, safeMessage);
     }
 }

@@ -28,11 +28,6 @@ public class ContactController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
-    public ResponseEntity<List<com.alejosoftware.cv.model.ContactMessage>> getAllMessages() {
-        return ResponseEntity.ok(contactService.getAllMessages());
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ContactResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
