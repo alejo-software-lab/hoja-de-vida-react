@@ -37,11 +37,6 @@ const Navbar = ({ darkMode, setDarkMode }) => {
            {/* Logo */}
            <div className="flex-shrink-0 flex items-center gap-2">
                <a href="#inicio" className="flex items-center gap-2 group">
-                 <img
-                   src="/alejoS.png"
-                   alt="Alejandro Muñoz"
-                   className="h-10 w-auto"
-                 />
                  <span className="font-bold text-xl tracking-tight text-indigo-600 dark:text-indigo-400">
                    Alejandro Muñoz
                  </span>

@@ -30,8 +30,8 @@ function App() {
     const hideLoader = () => {
       const loader = document.getElementById('app-loader');
       if (loader) {
-        loader.classList.add('app-loader--hidden');
-        setTimeout(() => loader.remove(), 700);
+        setTimeout(() => loader.classList.add('app-loader--hidden'), 800);
+        setTimeout(() => loader.remove(), 2500);
       }
     };
 
@@ -40,7 +40,7 @@ function App() {
     } else {
       window.addEventListener('load', hideLoader, { once: true });
     }
-    const fallback = setTimeout(hideLoader, 3000);
+    const fallback = setTimeout(hideLoader, 5000);
     return () => {
       window.removeEventListener('load', hideLoader);
       clearTimeout(fallback);
