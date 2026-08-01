@@ -1,66 +1,75 @@
 # Hoja de Vida — Alejandro Muñoz
 
-Portafolio / hoja de vida personal desarrollado con **React + Vite + Tailwind CSS**, con un **backend en Node.js (Express)** que recibe los mensajes del formulario de contacto.
+Portafolio / hoja de vida personal: **React + Vite + Tailwind CSS** (sitio estático)
+más una **API de contacto minimalista en Node.js** que envía los mensajes del
+formulario por correo mediante **Resend**.
+
+La API no usa base de datos ni frameworks: es un único archivo Node sin
+dependencias externas (`api/server.js`). El registro de cada mensaje es el
+propio correo que llega al buzón.
+
+## Arquitectura
+
+| Pieza | Qué es | Se duerme |
+|---|---|---|
+| **Frontend** (`/`) | Sitio estático Vite, servido como archivos. | No |
+| **API** (`/api`) | Servicio Node `POST /api/contact` → valida, escapa HTML, limita por IP y envía vía Resend. | Sí (plan free de Render) |
+
+El envío de correo se hace **solo en el servidor**: la API key de Resend nunca
+llega al navegador.
 
 ## Tecnologías
 
 - **Frontend:** React 19, Vite, Tailwind CSS, lucide-react.
-- **Backend:** Node.js, Express, CORS, Nodemailer.
-- **Persistencia:** los mensajes se guardan en `server/messages.json` (no requiere base de datos).
-- **Despliegue:** Render / Railway (gratuito).
-
-## Puertos y rutas
-
-- El servidor Express sirve tanto la web como la API.
-- `POST /api/contact` → recibe `{ name, email, subject, message }`, valida y guarda el mensaje.
-- En producción el backend sirve los archivos de `dist/`.
+- **API:** Node.js ≥18 (sin dependencias), `fetch` nativo, Resend HTTP API.
+- **Anti-abuso:** honeypot + rate-limit por IP + validación estricta. Turnstile opcional.
+- **Despliegue:** Render (Blueprint `render.yaml`).
 
 ## Puesta en marcha (desarrollo)
 
+Dos procesos en paralelo:
+
 ```bash
+# 1) API de contacto
+cd api
+cp .env.example .env     # completa RESEND_API_KEY y MAIL_TO
+npm start                # http://localhost:3001
+```
+
+```bash
+# 2) Frontend
 npm install
-npm run dev        # frontend con Vite (http://localhost:5173)
-npm run server     # backend Express (http://localhost:3001)
+npm run dev              # http://localhost:5173
 ```
 
-> El proxy de Vite reenvía `/api` al backend en `http://localhost:3001`.
+> El proxy de Vite reenvía `/api` a `http://localhost:3001`, así que en
+> desarrollo no hay CORS.
 
-## Producción
+## Producción (Render)
 
-```bash
-npm run build      # genera la carpeta dist/
-npm start          # Express sirve la web + API en http://localhost:3001
-```
+Conecta el repo y usa `render.yaml` (Blueprint). Crea dos servicios:
 
-## Configuración de correo (opcional)
+1. **cv-frontend** (Static Site) — build `npm run build`, publica `dist/`.
+2. **cv-contact-api** (Web Service, Node) — raíz `api/`.
 
-Copia `.env.example` a `.env` y completa tus credenciales SMTP para recibir
-los mensajes del formulario por correo real:
+Variables a definir en el panel de Render:
 
-```ini
-SMTP_HOST=tu_smtp
-SMTP_PORT=587
-SMTP_SECURE=false
-SMTP_USER=tu_usuario
-SMTP_PASS=tu_contraseña_o_token
-MAIL_TO=Alejandromg94@outlook.com
-```
+| Servicio | Variable | Valor |
+|---|---|---|
+| cv-contact-api | `RESEND_API_KEY` | tu API key de Resend (secreto) |
+| cv-contact-api | `MAIL_TO` | buzón que recibe los mensajes |
+| cv-contact-api | `ALLOWED_ORIGINS` | URL pública del frontend |
+| cv-frontend | `VITE_API_URL` | URL pública de la API |
 
-Si no configuras el SMTP, los mensajes se guardan igualmente en
-`server/messages.json`.
-
-## Despliegue
-
-- **Render:** conecta el repo de GitHub y usa `render.yaml` (Blueprint).
-- **Railway:** conecta el repo de GitHub; detecta `Procfile` / `railway.toml`.
-
-En el panel de la plataforma puedes agregar las variables SMTP para enviar
-correos reales.
+Opcional — captcha anti-bot con Cloudflare Turnstile: define `TURNSTILE_SECRET`
+en la API y `VITE_TURNSTILE_SITE_KEY` en el frontend. Si se dejan vacíos, se
+desactiva y siguen operando el honeypot y el rate-limit.
 
 ## Estructura
 
 ```
 src/components/   Componentes de la UI (Hero, About, Skills, Experience, Projects, Contact, Footer, Navbar)
-server/index.js   Backend Express (API de contacto + sirve dist/)
+api/server.js     API de contacto (Node sin dependencias): valida + envía vía Resend
 public/           Recursos estáticos (foto-alejo.jpg, favicon, icons)
+render.yaml       Blueprint de Render (frontend estático + API)
 ```

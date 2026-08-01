@@ -1,0 +1,14 @@
+{
+  "name": "cv-contact-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API de contacto sin dependencias: valida y envía correo vía Resend.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
