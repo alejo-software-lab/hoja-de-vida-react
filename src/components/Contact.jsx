@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Mail,
   MapPin,
@@ -11,16 +10,53 @@ import {
   Phone,
 } from "lucide-react";
 
+// Base del API: en dev queda vacía y el proxy de Vite redirige /api al servicio
+// Node local; en producción apunta al Web Service de Render (VITE_API_URL).
+const API_BASE = import.meta.env.VITE_API_URL || "";
+
+// Cloudflare Turnstile (captcha anti-bot). Opcional: si no hay site key, no se
+// carga nada y el formulario funciona solo con honeypot + rate-limit del servidor.
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
+    company: "", // honeypot: oculto para humanos, los bots lo rellenan
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+  const turnstileRef = useRef(null);
+  const widgetId = useRef(null);
+
+  // Carga el script de Turnstile y renderiza el widget solo si hay site key.
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return;
+    const render = () => {
+      if (!window.turnstile || !turnstileRef.current || widgetId.current !== null) return;
+      widgetId.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+      });
+    };
+    if (window.turnstile) {
+      render();
+      return;
+    }
+    const src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    let script = document.querySelector(`script[src="${src}"]`);
+    if (!script) {
+      script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+    script.addEventListener("load", render);
+    return () => script.removeEventListener("load", render);
+  }, []);
 
   const validate = () => {
     let tempErrors = {};
@@ -50,25 +86,36 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        },
-        import.meta.env.VITE_EMAILJS_USER_ID
-      );
+      const turnstileToken =
+        TURNSTILE_SITE_KEY && window.turnstile
+          ? window.turnstile.getResponse(widgetId.current)
+          : undefined;
+
+      const res = await fetch(`${API_BASE}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, turnstileToken }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        // El servidor puede devolver errores por campo o un mensaje general.
+        if (data.errors) setErrors(data.errors);
+        else setErrors({ message: data.error || "No se pudo enviar el mensaje. Intenta de nuevo." });
+        return;
+      }
 
       setSubmitSuccess(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", subject: "", message: "", company: "" });
       setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (err) {
       console.error(err);
-      setErrors({ message: "No se pudo enviar el mensaje. Intenta de nuevo." });
+      setErrors({ message: "No se pudo conectar con el servidor. Intenta más tarde." });
     } finally {
+      // Un token de Turnstile es de un solo uso: resetea para el próximo envío.
+      if (TURNSTILE_SITE_KEY && window.turnstile && widgetId.current !== null) {
+        window.turnstile.reset(widgetId.current);
+      }
       setIsSubmitting(false);
     }
   };
@@ -240,6 +287,17 @@ const Contact = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot anti-bot: oculto para humanos, no debe rellenarse */}
+                <input
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  tabIndex="-1"
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
                 {/* Row: Name and Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   {/* Name field */}
@@ -354,6 +412,9 @@ const Contact = () => {
                     </span>
                   )}
                 </div>
+
+                {/* Turnstile: se renderiza aquí solo si hay VITE_TURNSTILE_SITE_KEY */}
+                {TURNSTILE_SITE_KEY && <div ref={turnstileRef} className="min-h-[65px]" />}
 
                 {/* Submit button */}
                 <button

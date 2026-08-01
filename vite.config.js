@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "http://localhost:8080",
+      // El API de contacto ahora es el servicio Node (api/server.js) en :3001
+      "/api": "http://localhost:3001",
     },
   },
 })
