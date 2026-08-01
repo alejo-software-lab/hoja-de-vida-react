@@ -12,6 +12,11 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-200/50 dark:border-slate-900/50">
           {/* Logo */}
           <div className="flex items-center gap-2">
+            <img
+              src="/alejoS.png"
+              alt="Alejandro Muñoz"
+              className="h-10 w-auto"
+            />
             <span className="font-bold text-lg text-indigo-600 dark:text-indigo-400">
               Alejandro Muñoz
             </span>
