@@ -47,27 +47,31 @@ const Contact = () => {
     e.preventDefault();
     if (!validate()) return;
 
+    const FORMSPREE_ENDPOINT = import.meta.env.FORMSPREE_ENDPOINT || "https://formspree.io/f/TU_FORM_ID";
+
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        throw new Error(data.error || "Error al enviar el mensaje.");
+
+      if (res.ok) {
+        setSubmitSuccess(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setSubmitSuccess(false), 5000);
+      } else {
+        throw new Error("Error al enviar");
       }
-      if (!data.emailSent) {
-        setErrors({
-          message:
-            "Tu mensaje fue guardado, pero el correo no se pudo enviar automáticamente. Escríbeme directamente a Alejandromg94@outlook.com.",
-        });
-        return;
-      }
-      setSubmitSuccess(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (err) {
       setErrors({ message: "No se pudo enviar el mensaje. Intenta de nuevo." });
     } finally {

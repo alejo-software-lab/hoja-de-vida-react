@@ -1,21 +1,6 @@
-services:
-  - type: web
-    name: hoja-de-vida-backend
-    runtime: java
-    plan: free
-    buildCommand: "./mvnw clean package -Pprod -DskipTests"
-    startCommand: "java -jar target/hoja-de-vida-backend-1.0.0.jar"
-    healthCheckPath: "/api/health"
-    envVars:
-      - key: JAVA_VERSION
-        value: "21"
-      - key: SPRING_PROFILES_ACTIVE
-        value: "prod"
-      - key: SERVER_PORT
-        value: "10000"
-      - key: CORS_ALLOWED_ORIGINS
-        sync: false
-      - key: MAIL_TO
-        value: "alejosoftwarelabs@gmail.com"
-      - key: RESEND_API_KEY
-        sync: false
+buildCommand: "npm install && npm run build"
+startCommand: "npx serve -s dist -l 10000"
+healthCheckPath: "/"
+env:
+  - key: FORMSPREE_ENDPOINT
+    value: "https://formspree.io/f/TU_FORM_ID"

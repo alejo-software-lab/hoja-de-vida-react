@@ -7,10 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview",
-    "build:prod": "mvn clean package -Pprod",
-    "start:prod": "java -jar target/hoja-de-vida-backend-1.0.0.jar",
-    "dev:full": "concurrently \"mvn spring-boot:run -Dspring-boot.run.profiles=dev\" \"npm run dev\""
+    "preview": "vite preview"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

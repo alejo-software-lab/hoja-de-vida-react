@@ -1,1 +1,0 @@
-web: java -jar target/hoja-de-vida-backend-1.0.0.jar
