@@ -1,13 +1,13 @@
 import React from "react";
 import {
   FolderGit2,
-  GitFork,
   Globe,
   Mail,
   Phone,
   MessageCircle,
   ExternalLink,
 } from "lucide-react";
+import GitHubIcon from "./GitHubIcon";
 
 const Projects = () => {
   return (
@@ -42,7 +42,7 @@ const Projects = () => {
           >
             <div className="flex items-center gap-5">
               <div className="p-4 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white group-hover:scale-110 transition-transform duration-300">
-                <GitFork className="w-10 h-10" />
+                <GitHubIcon className="w-10 h-10" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-slate-850 dark:text-white">

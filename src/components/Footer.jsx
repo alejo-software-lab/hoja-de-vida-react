@@ -1,5 +1,6 @@
 import React from "react";
-import { ArrowUp, Code2, Globe, Mail } from "lucide-react";
+import { ArrowUp, Globe, Mail } from "lucide-react";
+import GitHubIcon from "./GitHubIcon";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -18,7 +19,7 @@ const Footer = () => {
               className="h-10 w-auto"
             />
             <span className="font-bold text-lg text-indigo-600 dark:text-indigo-400">
-              Alejandro Muñoz
+              AlejoSoftwareLabs
             </span>
           </div>
 
@@ -65,7 +66,7 @@ const Footer = () => {
               className="text-slate-400 dark:text-slate-555 hover:text-slate-750 dark:hover:text-white transition-colors"
               aria-label="GitHub"
             >
-              <Code2 className="w-5 h-5" />
+              <GitHubIcon className="w-5 h-5" />
             </a>
             <a
               href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395"
@@ -89,7 +90,7 @@ const Footer = () => {
         {/* Copyright and back to top */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-400">
           <p>
-            © {new Date().getFullYear()} Alejandro Muñoz. Todos los derechos
+            © {new Date().getFullYear()} AlejoSoftwareLabs. Todos los derechos
             reservados. Creado con React y Tailwind CSS.
           </p>
 

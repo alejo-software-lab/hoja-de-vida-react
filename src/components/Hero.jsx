@@ -1,5 +1,6 @@
 import React from "react";
-import { ArrowDown, Code2, Globe, Mail, ExternalLink } from "lucide-react";
+import { ArrowDown, Globe, Mail, ExternalLink } from "lucide-react";
+import GitHubIcon from "./GitHubIcon";
 
 const Hero = () => {
   return (
@@ -24,7 +25,7 @@ const Hero = () => {
               <img
                 src="/foto-alejo.jpg"
                 alt="Foto de Alejandro Muñoz"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   e.currentTarget.nextElementSibling.style.display = 'flex';
@@ -86,7 +87,7 @@ const Hero = () => {
                 className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 hover:border-indigo-500 dark:hover:border-indigo-400 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm hover:shadow-md transition-all duration-300"
                 aria-label="GitHub"
               >
-                <Code2 className="w-6 h-6" />
+                <GitHubIcon className="w-6 h-6" />
               </a>
               <a
                 href="https://www.linkedin.com/in/daniel-alejandro-muñoz-godoy-8830b3395"
