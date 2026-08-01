@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   Mail,
   MapPin,
@@ -47,32 +48,25 @@ const Contact = () => {
     e.preventDefault();
     if (!validate()) return;
 
-    const FORMSPREE_ENDPOINT = import.meta.env.FORMSPREE_ENDPOINT || "https://formspree.io/f/TU_FORM_ID";
-
     setIsSubmitting(true);
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
-        }),
-      });
+        },
+        import.meta.env.VITE_EMAILJS_USER_ID
+      );
 
-      if (res.ok) {
-        setSubmitSuccess(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setTimeout(() => setSubmitSuccess(false), 5000);
-      } else {
-        throw new Error("Error al enviar");
-      }
+      setSubmitSuccess(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (err) {
+      console.error(err);
       setErrors({ message: "No se pudo enviar el mensaje. Intenta de nuevo." });
     } finally {
       setIsSubmitting(false);

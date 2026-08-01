@@ -2,5 +2,9 @@ buildCommand: "npm install && npm run build"
 startCommand: "npx serve -s dist -l 10000"
 healthCheckPath: "/"
 env:
-  - key: FORMSPREE_ENDPOINT
-    value: "https://formspree.io/f/TU_FORM_ID"
+  - key: VITE_EMAILJS_SERVICE_ID
+    value: "TU_SERVICE_ID"
+  - key: VITE_EMAILJS_TEMPLATE_ID
+    value: "kqfbqsj"
+  - key: VITE_EMAILJS_USER_ID
+    value: "TU_USER_ID"
