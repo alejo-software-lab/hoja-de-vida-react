@@ -13,7 +13,7 @@ const Footer = () => {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <img
-              src="/logo.png"
+              src="/alejoS.png"
               alt="Alejandro Muñoz"
               className="h-10 w-auto"
             />
