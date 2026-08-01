@@ -26,6 +26,27 @@ function App() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    const hideLoader = () => {
+      const loader = document.getElementById('app-loader');
+      if (loader) {
+        loader.classList.add('app-loader--hidden');
+        setTimeout(() => loader.remove(), 700);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      hideLoader();
+    } else {
+      window.addEventListener('load', hideLoader, { once: true });
+    }
+    const fallback = setTimeout(hideLoader, 3000);
+    return () => {
+      window.removeEventListener('load', hideLoader);
+      clearTimeout(fallback);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
       {/* Navigation */}
