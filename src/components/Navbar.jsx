@@ -41,7 +41,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                  <img
                    src="/logo.png"
                    alt="Alejo Software Labs"
-                   className="h-8 w-auto"
+                   className="h-12 w-auto"
                  />
                  <span className="font-bold text-xl tracking-tight text-indigo-600 dark:text-indigo-400">
                    Alejo Software Labs

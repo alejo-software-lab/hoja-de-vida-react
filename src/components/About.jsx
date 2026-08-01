@@ -18,9 +18,9 @@ const About = () => {
             <img
               src="/logo.png"
               alt="Alejo Software Labs"
-              className="h-16 w-auto"
+              className="h-24 w-auto"
             />
-            <span className="text-lg font-bold text-slate-700 dark:text-slate-300">
+            <span className="text-xl font-bold text-slate-700 dark:text-slate-300">
               Alejo Software Labs
             </span>
           </div>
