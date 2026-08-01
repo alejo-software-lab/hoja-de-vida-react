@@ -1,9 +1,12 @@
-buildCommand: "npm install && npm run build"
-staticPublishPath: ./dist
-env:
-  - key: VITE_EMAILJS_SERVICE_ID
-    value: "TU_SERVICE_ID"
-  - key: VITE_EMAILJS_TEMPLATE_ID
-    value: "kqfbqsj"
-  - key: VITE_EMAILJS_USER_ID
-    value: "TU_USER_ID"
+services:
+  - type: static
+    name: hoja-de-vida-react
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_EMAILJS_SERVICE_ID
+        value: "TU_SERVICE_ID"
+      - key: VITE_EMAILJS_TEMPLATE_ID
+        value: "kqfbqsj"
+      - key: VITE_EMAILJS_USER_ID
+        value: "TU_USER_ID"
