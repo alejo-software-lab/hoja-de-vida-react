@@ -24,6 +24,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
     { name: 'Habilidades', href: '#habilidades' },
     { name: 'Experiencia', href: '#experiencia' },
     { name: 'Proyectos', href: '#proyectos' },
+    { name: 'CV', href: '#cv' },
   ];
 
   return (
