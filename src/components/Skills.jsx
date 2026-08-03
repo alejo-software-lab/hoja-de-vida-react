@@ -189,7 +189,7 @@ const Skills = () => {
                   <div className="w-full h-7 bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden relative shadow-inner ring-1 ring-slate-200/70 dark:ring-slate-800/70">
                     {/* Progress Bar Fill */}
                     <div
-                      className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl transition-all duration-1000 ease-out relative"
+                      className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-red-500 rounded-xl transition-all duration-1000 ease-out relative"
                       style={{ width: `${skill.level}%` }}
                     >
                       <span className="absolute inset-y-0 left-2 flex items-center text-white text-xs font-bold drop-shadow">
