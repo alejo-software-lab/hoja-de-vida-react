@@ -177,26 +177,27 @@ const Skills = () => {
                 {skill.icon}
               </div>
 
-              {/* Progress and Details */}
-              <div className="flex-grow">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-bold text-slate-850 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-450 transition-colors duration-200">
-                    {skill.name}
-                  </h4>
-                  <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">
-                    {skill.level}%
-                  </span>
-                </div>
+                {/* Progress and Details */}
+                <div className="flex-grow">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-bold text-slate-850 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-450 transition-colors duration-200">
+                      {skill.name}
+                    </h4>
+                  </div>
 
-                {/* Progress Bar background */}
-                <div className="w-full h-2 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden">
-                  {/* Progress Bar Fill */}
-                  <div
-                    className="h-full bg-gradient-to-r from-indigo-550 to-purple-550 rounded-full transition-all duration-1000 ease-out"
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
+                  {/* Progress Bar background */}
+                  <div className="w-full h-6 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden relative">
+                    {/* Progress Bar Fill */}
+                    <div
+                      className="h-full bg-gradient-to-r from-indigo-550 to-purple-550 rounded-full transition-all duration-1000 ease-out flex items-center justify-end pr-2"
+                      style={{ width: `${skill.level}%` }}
+                    >
+                      <span className="text-white text-xs font-bold">
+                        {skill.level}%
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
             </div>
           ))}
         </div>
