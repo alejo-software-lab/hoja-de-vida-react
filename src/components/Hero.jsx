@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, Globe, Mail, ExternalLink } from "lucide-react";
+import { ArrowDown, Globe, Mail, ExternalLink, Download } from "lucide-react";
 import GitHubIcon from "./GitHubIcon";
 
 const Hero = () => {
@@ -75,6 +75,14 @@ const Hero = () => {
                 className="inline-flex items-center justify-center px-8 py-4 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-550 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-50 dark:hover:bg-slate-900 transition-all duration-300 transform hover:-translate-y-0.5"
               >
                 Contáctame
+              </a>
+              <a
+                href="/hoja-de-vida-alejandro-munoz.pdf"
+                download
+                className="inline-flex items-center justify-center px-6 py-4 rounded-2xl border border-indigo-300 dark:border-indigo-700 hover:border-indigo-500 dark:hover:border-indigo-500 text-indigo-600 dark:text-indigo-400 font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition-all duration-300 transform hover:-translate-y-0.5"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                <span>Descargar CV</span>
               </a>
             </div>
 

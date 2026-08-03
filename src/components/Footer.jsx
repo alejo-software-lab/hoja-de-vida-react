@@ -55,12 +55,6 @@ const Footer = () => {
             >
               Proyectos
             </a>
-            <a
-              href="#cv"
-              className="hover:text-indigo-600 dark:hover:text-indigo-450 transition-colors"
-            >
-              CV
-            </a>
           </div>
 
           {/* Social icons */}
