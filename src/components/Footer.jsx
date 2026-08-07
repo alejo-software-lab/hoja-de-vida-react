@@ -16,7 +16,7 @@ const Footer = () => {
             <img
               src="/alejoS.png"
               alt="Alejandro Muñoz"
-              className="h-16 w-16 sm:h-20 sm:w-20 rounded"
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded"
             />
             <span className="font-bold text-lg text-indigo-600 dark:text-indigo-400">
               AlejoSoftwareLabs
